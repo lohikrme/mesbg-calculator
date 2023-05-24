@@ -30,6 +30,6 @@ specific weapon combinations to be used at one time. I also decided to write dow
 because I wanted the wounding system to be clear. Fight calculator uses 2 js-files (fight-inputs and fight-calculator), other calculators use only 1 js file. Styles.css applies to every html file, but 
 personalised modifications are done within a specific css-file.
 
-Anyways, I hope this program will be useful for lots of players. Have fun calculating stuff!
+Have fun calculating stuff!
 
 -lohikrme
