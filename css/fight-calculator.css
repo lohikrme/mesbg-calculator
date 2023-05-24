@@ -1,0 +1,149 @@
+
+p {
+    
+    font-weight: bold;
+}
+
+button {
+    font-size: 110%;
+}
+
+.second-header {
+    height: 20vh;
+    display: flex;
+}
+
+.answer {
+    padding: 4vh 0 2vh 1vw;
+    width: 40vw;
+    height: 100%;
+    margin: 2vh 0 0 0;
+}
+
+.answer p {
+    margin: 1vh 0 1vh 2vw;
+    font-size: 110%;
+}
+
+.calculate-button {
+    width: 50vw;
+    height: 100%;
+    margin: 2vh 0 0 0;
+}
+
+.calculate-button button {
+    padding: 1vh 1vh;
+    margin: 4vh 0 0 1vh;
+    font-size: 1.2em;
+}
+
+.wrap {
+    display: flex;
+}
+
+.wrap h2 {
+    margin: 1vh 0 0 0;
+}
+
+.wrap button {
+    padding: 1vh 1vh;
+}
+
+
+.A {
+    height: 50vh;
+    width: 50vw;
+    max-width: 200px;
+    padding: 0 0 0 2vw;
+}
+
+.A p {
+    margin: 2vh 0 0 0; 
+}
+
+.A h2 {
+    padding: 1vh 0 1vh 2vh;
+}
+
+.A button {
+    margin: 3vh 0 0 1vw;
+}
+
+
+.B {
+    height: 50vh;
+    width: 25vw;
+    padding: 0 0 0 2vw;
+}
+
+.B h2 {
+    padding: 1vh 0 1vh 2vh;
+}
+
+.B p {
+    margin: 2vh 0 0 0; 
+}
+
+.B button {
+    margin: 3vh 0 0 1vw;
+}
+
+
+
+
+@media screen and (max-width: 830px) {
+
+    .answer {
+        width: 70vw;
+    }
+    
+    .wrap {
+        display:block;
+    }
+    
+    .wrap button {
+        margin: 0 0 0 0;
+    }
+
+    .calculate-button {
+        margin: 2vh 0 0 0;
+    }
+    
+    .A {
+        height: 32vh;
+        min-width: 100%;
+        padding: 0 0 0 4vw;
+    }
+    
+    .A h2 {
+        padding: 2vh 0 0 0;
+    }
+    
+    
+    
+    .B {
+        height: 32vh;
+        min-width: 100%;
+        padding: 0 0 0 4vw;
+        
+    }
+    
+    
+    .B h2 {
+        padding: 2vh 0 0 0;
+    }
+    
+    .answer {
+        padding: 1vh 0 1vh 3vw;
+        margin: 2vh 0 0 0;
+    }
+    
+    .answer p {
+        margin: 2vh 0 2vh 2vw;
+    }
+
+    .fight-calculator-background {
+        margin: 5vh 0 0 5vw;
+    }
+    
+}

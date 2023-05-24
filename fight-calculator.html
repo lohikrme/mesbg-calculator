@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/fight-calculator.css" rel="stylesheet" />
+    <title>mesbg.probability.calculator</title>
+</head>
+
+<body class="fight-calculator">
+    <header>
+        <h1>MESBG PROBABILITY CALCULATOR</h1>
+        <ul class="menu-items-list">
+            <li id="main"><a href="main.html">General Information</a></li>
+            <li id="fight-calculator"><a href="fight-calculator.html">Fight Calculator</a></li>
+            <li id="courage-calculator"><a href="courage-calculator.html">Courage Calculator</a></li>
+            <li id="damage-calculator"><a href="damage-calculator.html">Damage Calculator</a></li>
+            <li id="magic-calculator"><a href="magic-calculator.html">Magic Calculator</a></li>
+        </ul>
+    </header>
+    <div class="second-header">
+        <div class="answer">
+            <p id="answer1">Probability that A wins: 50%</p>
+            <p id="answer2">Probability that B wins: 50%</p>
+        </div>
+        <div class="calculate-button">
+            <button id="test" onclick="activate_calculation()">Calculate</button>
+        </div>
+    </div> <!--second-header ends-->
+    <div class="wrap">
+        <div class="A">
+            <h2>Opponent A</h2>
+            <p id="text-A-dice">Dice-Amount: </p>
+            <input id="slider-A-dice" type="range" min="1" max="10" oninput="slider_A_dice_change_click()">
+
+            <p id="text-A-fight">Fight-value: </p>
+            <input id="slider-A-fight" type="range" min="1" max="10" oninput="slider_A_fight_change_click()">
+            <br>
+            <button id="button-A-elven-sword" onclick="button_A_elven_sword_click()">Elven sword</button>
+        </div>
+        <div class="B">
+            <h2>Opponent B</h2>
+            <p id="text-B-dice">Dice-Amount: </p>
+            <input id="slider-B-dice" type="range" min="1" max="10" oninput="slider_B_dice_change_click()">
+            <p id="text-B-fight">Fight-value: </p>
+            <input id="slider-B-fight" type="range" min="1" max="10" oninput="slider_B_fight_change_click()">
+            <br>
+            <button id="button-B-elven-sword" onclick="button_B_elven_sword_click()">Elven sword</button>
+        </div>
+    </div> <!-- wrap ends-->
+    <footer>
+
+    </footer> <!-- footer ends-->
+
+
+    <script src="fight-inputs.js"></script>
+    <script src="fight-calculator.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/damage-calculator.css" rel="stylesheet" />
+    <title>mesbg.probability.calculator</title>
+</head>
+
+<body class="damage-calculator">
+    <header>
+        <h1>MESBG PROBABILITY CALCULATOR</h1>
+        <ul class="menu-items-list">
+            <li id="main"><a href="main.html">General Information</a></li>
+            <li id="fight-calculator"><a href="fight-calculator.html">Fight Calculator</a></li>
+            <li id="courage-calculator"><a href="courage-calculator.html">Courage Calculator</a></li>
+            <li id="damage-calculator"><a href="damage-calculator.html">Damage Calculator</a></li>
+            <li id="magic-calculator"><a href="magic-calculator.html">Magic Calculator</a></li>
+        </ul> <!-- menu item list ends-->
+    </header>
+    <main>
+        <button id="calculate" onclick="launch_calculator()">Calculate</button>
+        <p id="answer">Average wounds caused: </p>
+
+        <div class="sliders">
+
+            <div class="own-stats">
+                <h2>Own Stats:</h2>
+
+                <p id="text-own-attacks">Own attacks: 6</p>
+                <input id="own-attacks-slider" type="range" min="1" max="10" oninput="own_attacks_input()">
+
+                <p id="text-own-strength">Own strength: 6</p>
+                <input id="own-strength-slider" type="range" min="1" max="10" oninput="own_strength_input()">
+            </div> <!-- own stats ends-->
+
+            <div class="enemy-stats">
+                <h2>Enemy Stats:</h2>
+
+                <p id="text-enemy-defence">Enemy defence: 6</p>
+                <input id="enemy-defence-slider" type="range" min="1" max="10" oninput="enemy_defence_input()">
+
+                <p id="text-enemy-strength">Enemy strenght: 6</p>
+                <input id="enemy-strength-slider" type="range" min="1" max="10" oninput="enemy_strength_input()">
+            </div> <!-- enemy stats ends-->
+
+        </div> <!-- sliders ends-->
+
+        <div class="buttons">
+            <button id="rend-button" onclick="rend_click()">Rend</button>
+            <button id="two-handed-weapon-button" onclick="two_handed_weapon_click()">Two-Handed-Weapon</button>
+            <button id="reroll-one-button" onclick="reroll_one_click()">Reroll 1's</button>
+            <button id="reroll-all-button" onclick="reroll_all_click()">Reroll All</button>
+            <button id="anduril-button" onclick="anduril_click()">Anduril Sword</button>
+        </div> <!-- buttons ends-->
+
+    </main> <!-- main ends-->
+    <footer>
+
+    </footer> <!-- footer ends-->
+
+    <script src="wound-charts.js"></script>
+    <script src="damage-calculator.js"></script>
+</body>
+
+</html>

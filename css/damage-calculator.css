@@ -1,0 +1,96 @@
+
+
+
+main {
+    margin: 10vh 0 0 0;
+    min-height: 170vh;
+}
+
+#calculate {
+    position: absolute;
+    margin: 3vh 0 0 40vw;
+    padding: 1vh;
+    font-size: 1.3em;
+}
+
+#answer {
+    margin: 4vh 0 5vh 2vw;
+    max-width: 70vw;
+    font-size: 1.2em;
+}
+
+.sliders {
+    margin: 2vh 0 0 2vw;
+    display: flex;
+}
+
+.sliders p{
+    margin: 2vh 0 0 0;
+}
+
+.own-stats {
+    margin: 0 5vw 0 0;
+}
+
+.buttons {
+    margin: 3vh 0 0 1vw;
+}
+
+.buttons button{
+    padding: 1vh;
+    margin: 1vw;
+    font-size: 1.1em;
+}
+
+
+#troll-chieftain {
+    margin: 5vh 0 0 5vw;
+    width: 60vw;
+}
+
+
+@media screen and (max-width: 1600px) {
+
+    
+    #calculate {
+        margin: 3vh 0 0 40vw;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    #calculate {
+        margin: 3vh 0 0 55vw;
+    }
+}
+
+
+
+
+@media screen and (max-width: 830px) {
+    
+    .sliders {
+        display: block;
+    }
+
+    .own-stats {
+        margin: 0 0 5vh 0;
+    }
+
+    .enemy-stats {
+        margin: 0 0 4vh 0;
+    }
+
+    .buttons {
+        display: block;
+    }
+
+    .buttons button {
+        margin: 0 50vw 1vh 2vw;
+    }
+
+
+    #calculate {
+        margin: 8vh 0 0 56vw;
+    }
+}

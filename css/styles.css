@@ -1,0 +1,214 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    background-image: linear-gradient(#cee28d, #2f8536);
+}
+
+main {
+    min-height: 100vh;
+}
+
+header {
+    background-image: url("../images/forest1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgb(62, 62, 51);
+    height: 40vh;
+    max-height: 455px;
+    padding: 6vh 0 0 7vh;
+
+
+}
+
+header h1 {
+    font-weight: bolder;
+    text-shadow: -3px 2px 7px #f0eee9;
+    margin: 2vh 0 0 0;
+    color: #a30b0bcc;
+}
+
+.menu-items-list {
+    list-style-image: url("../images/onering.png");
+    margin: 0 0 0 2vw;
+}
+
+header ul {
+    display: flex;
+    padding: 0px;
+    margin: 1vh 0 0 2vw;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+header li {
+    margin: 7vh 5vw 0 0;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+header a {
+    text-decoration: none;
+    list-style-type: none;
+    color: #a30b0bcc;
+    text-shadow: -3px 2px 7px #f0eee9;
+}
+
+header a:hover,
+header a:active,
+header a:focus {
+    color: #1b1a52;
+    text-decoration: underline;
+}
+
+.general-information {
+    margin: 6vh 0 0 3vw;
+}
+
+.general-information h2 {
+    margin: 0 0 1vh 0;
+}
+
+.general-information p {
+    margin: 0 0 5vh 0;
+    line-height: 1.5;
+    width: 60vw;
+}
+
+.main #main a,
+.fight-calculator #fight-calculator a,
+.courage-calculator #courage-calculator a,
+.damage-calculator #damage-calculator a,
+.magic-calculator #magic-calculator a {
+    color: #1b1a52;
+}
+
+
+footer {
+    min-height: 10vh;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .general-information p {
+        width: 70vw;
+    }
+}
+
+
+
+@media screen and (max-width: 830px) {
+
+    header {
+        padding: 2vh 0 0 3vw;
+    }
+
+    header h1 {
+        padding: 2vh 0 0 4vw;
+    }
+
+    .menu-items-list {
+        margin: 0 0 0 10vw;
+    }
+
+    header ul {
+        padding-top: 4vh;
+    }
+
+    header ul li {
+        margin: 0 2vw 0 0;
+        padding: 1vh 1vw;
+    }
+
+    header h1 {
+        padding: 6vh 0 0 2vw;
+        margin: 0;
+    }
+
+    main {
+        padding: 0 0 0 2vw;
+    }
+
+    .general-information p {
+        width: 80vw;
+    }
+
+
+}
+
+
+@media screen and (max-width: 720px) {
+
+    header {
+        background-image: url("../images/forest2.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 90vh;
+        max-height: 595px;
+
+    }
+
+    header ul {
+        margin: 7vh 0 0 1vw;
+        padding: 0;
+        display: block;
+    }
+
+    header ul li {
+        margin: 2vh 0 0 0;
+    }
+}
+
+
+
+@media screen and (max-width: 630px) {
+    .menu-items-list {
+        margin-left: 12vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .menu-items-list {
+        margin-left: 14vw;
+    }
+
+    .general-information p {
+        width: 85vw;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    header {
+        min-height: 600px;
+    }
+
+    .menu-items-list {
+        margin-left: 16vw;
+    }
+}
+
+
+@media screen and (max-width: 330px) {
+
+    .menu-items-list {
+        margin-left: 20vw;
+    }
+}
+
+
+@media screen and (max-width: 280px) {
+
+    .menu-items-list {
+        margin-left: 24vw;
+    }
+
+    header {
+        height: 1000px;
+    }
+}

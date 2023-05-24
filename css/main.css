@@ -1,0 +1,12 @@
+
+#link-to-GW {
+    color: blue;
+}
+
+#link-to-GW:hover {
+    opacity: 0.5;
+}
+
+#dragon {
+    max-width: 90vw;
+}

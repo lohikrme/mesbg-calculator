@@ -1,0 +1,30 @@
+.wrap {
+    margin: 2vh 0 0 2vh;
+}
+
+#calculate-button {
+    width: 5vw;
+    height: 2vw;
+    min-width: 100px;
+    min-height: 40px;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+#spell-works-button {
+    width: 5vw;
+    height: 3vw;
+    font-size: 1.7em;
+    min-width: 70px;
+    min-height: 40px;
+}
+
+#spell-works-button:hover {
+    background-color: #b79a49;
+}
+
+.wrap button {
+    margin: 1vh 0 1vh 0;
+}
+
+.wrap p {}

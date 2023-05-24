@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/courage-calculator.css" rel="stylesheet" />
+    <title>mesbg.probability.calculator</title>
+</head>
+
+<body class="courage-calculator">
+    <header>
+        <h1>MESBG PROBABILITY CALCULATOR</h1>
+        <ul class="menu-items-list">
+            <li id="main"><a href="main.html">General Information</a></li>
+            <li id="fight-calculator"><a href="fight-calculator.html">Fight Calculator</a></li>
+            <li id="courage-calculator"><a href="courage-calculator.html">Courage Calculator</a></li>
+            <li id="damage-calculator"><a href="damage-calculator.html">Damage Calculator</a></li>
+            <li id="magic-calculator"><a href="magic-calculator.html">Magic Calculator</a></li>
+        </ul>
+    </header>
+    <main>
+        <button id="calculate" onclick="launch_calculator()">Calculate</button>
+        <p id="answer">The probability to pass the courage test is: </p>
+        <div class="sliders">
+            <p id="text-courage-slider">Base-Courage: 4</p>
+            <input id="courage-slider" type="range" min="0" max="8" oninput="change_courage()">
+            <p id="text-will-points-slider">Will points used:</p>
+            <input id="will-points-slider" type="range" min="0" max="3" oninput="change_will_points()">
+        </div> <!-- sliders ends-->
+        <div class="buttons">
+            <button id="ancient-evil-button" onclick="ancient_evil_button_click()">Ancient Evil / Harbinger of
+                Evil</button>
+            <button id="war-horn-button" onclick="war_horn_button_click()">War Horn</button>
+            <button id="channelled-terrifying-aura-button"
+                onclick="channelled_terrifying_aura_button_click()">Channelled Terrifying Aura</button>
+        </div> <!-- buttons ends-->
+    </main> <!-- main ends-->
+
+    <footer>
+
+    </footer><!-- footer ends-->
+
+    <script src="courage-calculator.js"></script>
+</body>
+
+</html>

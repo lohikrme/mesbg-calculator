@@ -1,0 +1,81 @@
+main {
+    margin: 10vh 0 0 0;
+    min-height: 130vh;
+}
+
+#answer {
+    margin: 4vh 0 0 2vw;
+    max-width: 70vw;
+    font-size: 1.1em;
+}
+
+.sliders p {
+    margin: 1vh 0 0 0;
+    font-size: 1.1em;
+}
+
+.sliders{
+    margin: 5vh 0 0 2vw;
+}
+
+#calculate {
+    position: absolute;
+    margin: 0vh 0 0 35vw;
+    padding: 1vh;
+    font-size: 1.3em;
+}
+
+.buttons {
+    margin: 3vh 0 0 1vw;
+}
+
+.buttons button{
+    padding: 1vh 1vh;
+    margin: 1vw;
+    font-size: 1.1em;
+}
+
+
+@media screen and (max-width: 3000px) {
+
+    #calculate {
+        margin: 0 0 0 25vw;
+    }
+}
+
+@media screen and (max-width: 2000px) {
+    #calculate {
+        margin: 0 0 0 32vw;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+
+    #calculate {
+        margin: 0 0 0 40vw;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    #calculate {
+        margin: 0 0 0 55vw;
+    }
+}
+
+
+
+
+@media screen and (max-width: 830px) {
+    .buttons {
+        display: block;
+    }
+
+    .buttons button {
+        margin: 0 50vw 1vh 0;
+    }
+
+    #calculate {
+        margin: 5vh 0 0 56vw;
+    }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/magic-calculator.css" rel="stylesheet" />
+    <title>mesbg.probability.calculator</title>
+</head>
+
+<body class="magic-calculator">
+    <header>
+        <h1>MESBG PROBABILITY CALCULATOR</h1>
+        <ul class="menu-items-list">
+            <li id="main"><a href="main.html">General Information</a></li>
+            <li id="fight-calculator"><a href="fight-calculator.html">Fight Calculator</a></li>
+            <li id="courage-calculator"><a href="courage-calculator.html">Courage Calculator</a></li>
+            <li id="damage-calculator"><a href="damage-calculator.html">Damage Calculator</a></li>
+            <li id="magic-calculator"><a href="magic-calculator.html">Magic Calculator</a></li>
+        </ul>
+    </header>
+    <main>
+        <div class="wrap">
+            <p id="answer">The probability that the spell goes in and works is: </p>
+            <br>
+            <button id="calculate-button" onclick="calculate()">Calculate</button>
+            <p id=" spell-works-text">Dice value required for the spell to work: </p>
+            <button id="spell-works-button" onclick="spell_works_button_click()">1</button>
+            <br>
+            <p id="attacker-dice-text">Dice to cast the spell:</p>
+            <input id="attacker-dice-slider" type="range" min="1" max="6" oninput="change_attacker_dice()">
+            <br>
+            <p id="defender-dice-text">Dice to resist the spell:</p>
+            <input id="defender-dice-slider" type="range" min="0" max="6" oninput="change_defender_dice()">
+        </div>
+    </main>
+
+    <footer>
+
+    </footer><!-- footer ends-->
+
+    <script src="magic-calculator.js"></script>
+</body>
+
+</html>
