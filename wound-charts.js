@@ -192,20 +192,21 @@ function two_handed_reroll_one_wound_chart() {
 
 //reroll one wound chart
 // for example if u would need normally 6 and 6, now u calculate that scenario next:
-//((1/6)*(1/6)+(1/6))*(1/6)*(1/6)+(1/6)) == 223/1296
+// 6-6 or 6-1-6 or 1-6-1-6 or 1-6-6
+// = 1/6 * 1/6 + 1/6 * 1/6 * 1/6 + 1/6*1/6 * 1/6 * 1/6 + 1/6 * 1/6 * 1/6
 function one_handed_reroll_one_wound_chart() {
     let factor = 1
     if (enemy_defence - 8 >= own_strength) {
         factor = 0
     }
     else if (enemy_defence - 7 == own_strength) {
-        factor = 223/1296
+        factor = 49/1296
     }
     else if (enemy_defence - 6 == own_strength) {
-        factor = 223/648
+        factor = 49/648
     }
     else if (enemy_defence - 5 == own_strength) {
-        factor = 223/432
+        factor = 49/432
     }
     else if (enemy_defence - 4 == own_strength) {
         factor = 7/36
