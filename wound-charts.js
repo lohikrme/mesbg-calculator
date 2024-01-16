@@ -146,7 +146,9 @@ function two_handed_wound_chart() {
 // if  you get 1 and 6, u can reroll that 1.
 // so, how to calculate situation where u would normally need 6 and 6 and now u need 5 and 5 
 // but you can reroll ones? That calculation would go next:
-// ((1/6)*(2/6) + (2/6)) * ((1/6)*(2/6) + (2/6)) = 49/324
+// 1/3 * 1/3 + 1/6 * 1/3 * 1/3 + 1/6 * 1/3 * 1/6 * 1/3 + 1/3 * 1/6 * 1/3 
+// other example: need normally 6/5, now 5/4:
+// 1/3 * 1/2 + 1/6 * 1/3 * 1/2 + 1/6 * 1/3 * 1/6 * 1/2 + 1/3 * 1/6 * 1/2 
 function two_handed_reroll_one_wound_chart() {
     
     let factor = 1
