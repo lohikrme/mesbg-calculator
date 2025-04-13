@@ -45,55 +45,6 @@ function rend_wound_chart() {
     return factor
 }
 
-// reroll_all wound chart
-// note that these probabilities are calculated with wolfram alpha to know probability per step in the wound chart
-// for example if you need 6 and 6 to wound. Normally that is 1/36. But now u can reroll fails.
-// so if u roll 12345 or first 6 and then 12345, u can reroll these situations. And after reroll probability is normal 1/36.
-// also if u roll 6 and 6 then u dont reroll. So the overall probability to cause wounds for 6 and 6 situation would be: 
-// (5/6) * (1/36) + (1/6) * (5/6) * (1/36) + (1/36) = 71/1296. And so on, each condition requires a bit similar calculation of probability.
-function reroll_all_wound_chart() {
-    let factor = 1
-    if (enemy_defence - 8 >= own_strength) {
-        factor = 0
-    }
-    else if (enemy_defence - 7 == own_strength) {
-        factor = 71/1296
-    }
-    else if (enemy_defence - 6 == own_strength) {
-        factor = 35/324
-    }
-    else if (enemy_defence - 5 == own_strength) {
-        factor = 23/144
-    }
-    else if (enemy_defence - 4 == own_strength) {
-        factor = 11/36
-    }
-    else if (enemy_defence - 3 == own_strength) {
-        factor = 11/36
-    }
-    else if (enemy_defence - 2 == own_strength) {
-        factor = 5/9
-    }
-    else if (enemy_defence - 1 == own_strength) {
-        factor = 5/9
-    }
-    else if (enemy_defence - 0 == own_strength) {
-        factor = 3/4
-    }
-    else if (enemy_defence + 1 == own_strength) {
-        factor = 3/4
-    }
-    else if (enemy_defence + 2 == own_strength) {
-        factor = 8/9
-    }
-    else {
-        factor = 8/9
-    }
-    return factor
-}
-
-
-
 
 
 // two-handed wound chart
@@ -131,13 +82,15 @@ function two_handed_wound_chart() {
         factor = 2/3
     }
     else if (enemy_defence + 2 == own_strength) {
-        factor = 2/3
+        factor = 5/6
     }
     else {
-        factor = 2/3
+        factor = 5/6
     }
     return factor
 }
+
+
 
 // two_handed_reroll_one_chart is quite complicated but it can be used if someone has 2h-sword 
 // and uses feint. for example: normally with 1h sword you would need 6 and 6 to wound, but 
@@ -151,7 +104,6 @@ function two_handed_wound_chart() {
 // other example: need normally 6/5, now 5/4:
 // 1/3 * 1/2 + 1/6 * 1/3 * 1/2 + 1/6 * 1/3 * 1/6 * 1/2 + 1/3 * 1/6 * 1/2 
 function two_handed_reroll_one_wound_chart() {
-    
     let factor = 1
     if (enemy_defence - 8 >= own_strength) {
         factor = 0
@@ -184,15 +136,16 @@ function two_handed_reroll_one_wound_chart() {
         factor = 7/9
     }
     else if (enemy_defence + 2 == own_strength) {
-        factor = 7/9
+        factor = 35/36
     }
     else {
-        factor = 7/9
+        factor = 35/36
     }
     return factor
 }
 
 
+// two handed reroll all chart
 // same idea as two handed weapon reroll ones
 // difference just is, all failed dice rolls are considered
 // e.g u str4 vs def7... u need 5+ with 2h weapon
@@ -209,7 +162,6 @@ function two_handed_reroll_one_wound_chart() {
 // 56 and 3456 or 1234 56 and 3456 or 1234 56 and 12 3456 or 56 and 12 3456
 // 1/3 * 2/3 + 2/3 * 1/3 * 2/3 + 2/3 * 1/3 * 1/3 * 2/3 + 1/3 * 1/3 * 2/3
 function two_handed_reroll_all_wound_chart() {
-    
     let factor = 1
     if (enemy_defence - 8 >= own_strength) {
         factor = 0
@@ -253,8 +205,13 @@ function two_handed_reroll_all_wound_chart() {
 
 //reroll one wound chart
 // for example if u would need normally 6 and 6, now u calculate that scenario next:
-// 6-6 or 6-1-6 or 1-6-1-6 or 1-6-6
-// = 1/6 * 1/6 + 1/6 * 1/6 * 1/6 + 1/6*1/6 * 1/6 * 1/6 + 1/6 * 1/6 * 1/6
+// (6 and 6 or 6 and 1 6 or 1 6 and 1 6 or 1 6 and 6)
+// = 1/6 * 1/6 + 1/6 * 1/6 * 1/6 + 1/6 * 1/6 * 1/6 * 1/6 + 1/6 * 1/6 * 1/6
+// other example is u try to get 6/4
+// (6 and 456 or 1 6 and 456 or 1 6 and 1 456 or 6 and 1 456)
+// 1/6 * 1/2 + 1/6 * 1/6 * 1/2 + 1/6 * 1/6 * 1/6 * 1/2 + 1/6 * 1/6 * 1/2
+// last example is try to get 3
+// 3456 or 1 3456
 function one_handed_reroll_one_wound_chart() {
     let factor = 1
     if (enemy_defence - 8 >= own_strength) {
@@ -297,8 +254,59 @@ function one_handed_reroll_one_wound_chart() {
 }
 
 
-// normal wound chart comes last because this is used when all other special scenarios
-// are not used. So when all special abilities are false then normal calculator is used.
+
+// reroll_all wound chart
+// note that these probabilities are calculated with wolfram alpha to know probability per step in the wound chart
+// for example if you need 6 and 6 to wound. Normally that is 1/36. But now u can reroll fails.
+// so if u roll 12345 or first 6 and then 12345, u can reroll these situations. And after reroll probability is normal 1/36.
+// also if u roll 6 and 6 then u dont reroll. So the overall probability to cause wounds for 6 and 6 situation would be: 
+// (5/6) * (1/36) + (1/6) * (5/6) * (1/36) + (1/36) = 71/1296. And so on, each condition requires a bit similar calculation of probability.
+function one_handed_reroll_all_wound_chart() {
+    let factor = 1
+    if (enemy_defence - 8 >= own_strength) {
+        factor = 0
+    }
+    else if (enemy_defence - 7 == own_strength) {
+        factor = 71/1296
+    }
+    else if (enemy_defence - 6 == own_strength) {
+        factor = 35/324
+    }
+    else if (enemy_defence - 5 == own_strength) {
+        factor = 23/144
+    }
+    else if (enemy_defence - 4 == own_strength) {
+        factor = 11/36
+    }
+    else if (enemy_defence - 3 == own_strength) {
+        factor = 11/36
+    }
+    else if (enemy_defence - 2 == own_strength) {
+        factor = 5/9
+    }
+    else if (enemy_defence - 1 == own_strength) {
+        factor = 5/9
+    }
+    else if (enemy_defence - 0 == own_strength) {
+        factor = 3/4
+    }
+    else if (enemy_defence + 1 == own_strength) {
+        factor = 3/4
+    }
+    else if (enemy_defence + 2 == own_strength) {
+        factor = 8/9
+    }
+    else {
+        factor = 8/9
+    }
+    return factor
+}
+
+
+
+// normal wound chart 
+// comes last because this is used when all other special scenarios are not used.
+// When all special abilities are false then normal calculator is used.
 function normal_wound_chart() {
     let factor = 1
     if (enemy_defence - 8 >= own_strength) {

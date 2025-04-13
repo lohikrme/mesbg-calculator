@@ -153,7 +153,7 @@ function launch_calculator() {
         two_handed_reroll_all_calculator()
     }
     else if (reroll_all_is_on) {
-        reroll_all_calculator()
+        one_handed_reroll_all_calculator()
     }
     else if (anduril_is_on) {
         anduril_calculator()
@@ -190,13 +190,13 @@ function rend_calculator() {
     document.getElementById("answer").innerHTML = `Average wounds caused: ${parseFloat(wounds_dealt.toFixed(3))}`
 }
 
-// reroll all calculator comes second because also this does not coexist with other abilities
-function reroll_all_calculator() {
+// one handed reroll all calculator comes second because also this does not coexist with other abilities
+function one_handed_reroll_all_calculator() {
     let wounds_dealt = 0
     function how_many_wounds() {
         let wounds_dealt2 = 0
         for (i = 0; i < own_attacks; i++) {
-            wounds_dealt2 += 1 * reroll_all_wound_chart()
+            wounds_dealt2 += 1 * one_handed_reroll_all_wound_chart()
         }
         return wounds_dealt2
     }
