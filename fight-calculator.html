@@ -22,9 +22,9 @@
         </ul>
     </header>
     <div class="second-header">
-        <div class="answer">
-            <p id="answer1">Probability that A wins: 50%</p>
-            <p id="answer2">Probability that B wins: 50%</p>
+        <div class="answers">
+            <p class="answer-item" id="answer1">Probability that A wins: %</p>
+            <p class="answer-item" id="answer2">Probability that B wins: %</p>
         </div>
         <div class="calculate-button">
             <button id="test" onclick="activate_calculation()">Calculate</button>
@@ -34,19 +34,19 @@
         <div class="A">
             <h2>Opponent A</h2>
             <p id="text-A-dice">Dice-Amount: </p>
-            <input id="slider-A-dice" value="3" type="range" min="1" max="10" oninput="slider_A_dice_change_click()">
+            <input id="slider-A-dice" type="range" min="1" max="10" oninput="slider_A_dice_change_click()">
 
             <p id="text-A-fight">Fight-value: </p>
-            <input id="slider-A-fight" value="4" type="range" min="1" max="10" oninput="slider_A_fight_change_click()">
+            <input id="slider-A-fight" type="range" min="1" max="10" oninput="slider_A_fight_change_click()">
             <br>
             <button id="button-A-elven-sword" onclick="button_A_elven_sword_click()">Elven sword</button>
         </div>
         <div class="B">
             <h2>Opponent B</h2>
             <p id="text-B-dice">Dice-Amount: </p>
-            <input id="slider-B-dice" value="3" type="range" min="1" max="10" oninput="slider_B_dice_change_click()">
+            <input id="slider-B-dice" type="range" min="1" max="10" oninput="slider_B_dice_change_click()">
             <p id="text-B-fight">Fight-value: </p>
-            <input id="slider-B-fight" value="4" type="range" min="1" max="10" oninput="slider_B_fight_change_click()">
+            <input id="slider-B-fight" type="range" min="1" max="10" oninput="slider_B_fight_change_click()">
             <br>
             <button id="button-B-elven-sword" onclick="button_B_elven_sword_click()">Elven sword</button>
         </div>

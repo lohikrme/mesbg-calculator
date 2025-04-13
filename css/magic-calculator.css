@@ -2,13 +2,18 @@
     margin: 2vh 0 0 2vh;
 }
 
+p {
+    font-size: 1.2em;
+}
+
 #calculate-button {
     width: 5vw;
     height: 2vw;
-    min-width: 100px;
+    min-width: 130px;
     min-height: 40px;
     font-size: 1.3em;
     margin-bottom: 20px;
+    padding: 5px;
 }
 
 #spell-works-button {

@@ -25,7 +25,7 @@
         <button id="calculate" onclick="launch_calculator()">Calculate</button>
         <p id="answer">The probability to pass the courage test is: </p>
         <div class="sliders">
-            <p id="text-courage-slider">Base-Courage: 4</p>
+            <p id="text-courage-slider">Base-Courage:</p>
             <input id="courage-slider" type="range" min="0" max="8" oninput="change_courage()">
             <p id="text-will-points-slider">Will points used:</p>
             <input id="will-points-slider" value="0" type="range" min="0" max="3" oninput="change_will_points()">
@@ -37,6 +37,11 @@
             <button id="channelled-terrifying-aura-button"
                 onclick="channelled_terrifying_aura_button_click()">Channelled Terrifying Aura (deprecated)</button>
         </div> <!-- buttons ends-->
+        <div class="infobox hidden"> 
+            <p> Ps. The courage here works similar to spectral blades. </p>
+            <p> For example: If an orc has a courage of 8, </p>
+            <p> here its base-courage is 10-8 = 2. </p>
+        </div>
     </main> <!-- main ends-->
 
     <footer>

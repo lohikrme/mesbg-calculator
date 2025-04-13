@@ -6,6 +6,10 @@ main {
     min-height: 170vh;
 }
 
+.description {
+    font-size: 1.3em;
+}
+
 #calculate {
     position: absolute;
     margin: 3vh 0 0 40vw;
@@ -30,6 +34,11 @@ main {
 
 .own-stats {
     margin: 0 5vw 0 0;
+    font-size: 0.9em;
+}
+
+.enemy-stats {
+    font-size: 0.9em;
 }
 
 .buttons {
