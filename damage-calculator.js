@@ -76,7 +76,7 @@ function rend_click() {
 
 // change two_handed_weapon_is_on
 function two_handed_weapon_click() {
-    if (rend_is_on == false && reroll_all_is_on == false) {
+    if (rend_is_on == false) {
         function change_two_handed_weapon() {
             if (two_handed_weapon_is_on == true) {
                 document.getElementById("two-handed-weapon-button").style.backgroundColor = `white`
@@ -110,7 +110,7 @@ function reroll_one_click() {
 
 // change reroll_all_is_on
 function reroll_all_click() {
-    if (rend_is_on == false && two_handed_weapon_is_on == false && reroll_one_is_on == false && anduril_is_on == false) {
+    if (rend_is_on == false && reroll_one_is_on == false && anduril_is_on == false) {
         function change_reroll_all() {
             if (reroll_all_is_on == true) {
                 document.getElementById("reroll-all-button").style.backgroundColor = `white`
@@ -148,6 +148,9 @@ function anduril_click() {
 function launch_calculator() {
     if (rend_is_on) {
         rend_calculator()
+    }
+    else if (reroll_all_is_on && two_handed_weapon_is_on) {
+        two_handed_reroll_all_calculator()
     }
     else if (reroll_all_is_on) {
         reroll_all_calculator()
@@ -247,6 +250,21 @@ function two_handed_reroll_one_calculator() {
         let wounds_dealt2 = 0
         for (i = 0; i < own_attacks; i++) {
             wounds_dealt2 += 1 * two_handed_reroll_one_wound_chart()
+        }
+        return wounds_dealt2
+    }
+    wounds_dealt = how_many_wounds()
+    document.getElementById("answer").innerHTML = `Average wounds caused: ${parseFloat(wounds_dealt.toFixed(3))}`
+}
+
+
+// two handed in situation when can reroll all failed dice rolls
+function two_handed_reroll_all_calculator() {
+    let wounds_dealt = 0
+    function how_many_wounds() {
+        let wounds_dealt2 = 0
+        for (i = 0; i < own_attacks; i++) {
+            wounds_dealt2 += 1 * two_handed_reroll_all_wound_chart()
         }
         return wounds_dealt2
     }

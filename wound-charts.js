@@ -139,13 +139,14 @@ function two_handed_wound_chart() {
     return factor
 }
 
-// two_handed_reroll_one_chart is quite complicated but it can be used if someone has 2h-sword and uses feint
-// example calculation: normally with 1h sword you would need 6 and 6 to wound, but 
+// two_handed_reroll_one_chart is quite complicated but it can be used if someone has 2h-sword 
+// and uses feint. for example: normally with 1h sword you would need 6 and 6 to wound, but 
 // now u would need only 5 and 5 two wound due to having 2h sword, and also
 // you can now reroll either/both dice if u get 1. So if u roll 6 and 1, u can reroll that 1. 
 // if  you get 1 and 6, u can reroll that 1.
 // so, how to calculate situation where u would normally need 6 and 6 and now u need 5 and 5 
 // but you can reroll ones? That calculation would go next:
+// (56 and 56 or 1 56 and 56 or 1 56 and 1 56 or 56 and 1 56)
 // 1/3 * 1/3 + 1/6 * 1/3 * 1/3 + 1/6 * 1/3 * 1/6 * 1/3 + 1/3 * 1/6 * 1/3 
 // other example: need normally 6/5, now 5/4:
 // 1/3 * 1/2 + 1/6 * 1/3 * 1/2 + 1/6 * 1/3 * 1/6 * 1/2 + 1/3 * 1/6 * 1/2 
@@ -187,6 +188,64 @@ function two_handed_reroll_one_wound_chart() {
     }
     else {
         factor = 7/9
+    }
+    return factor
+}
+
+
+// same idea as two handed weapon reroll ones
+// difference just is, all failed dice rolls are considered
+// e.g u str4 vs def7... u need 5+ with 2h weapon
+// would be calculated
+// (56 or 1234 56)
+// 1/3 + 2/3 * 1/3
+// other example, need wound chart says 6/6, so now u need 5+/5+ with 2h weapon would go next:
+// (56 and 56 or 1234 56 and 56 or 1234 56 and 1234 56 or 56 and 1234 56)
+// 1/3 * 1/3 + 2/3 * 1/3 * 1/3 + 2/3 * 1/3 * 2/3 * 1/3 + 1/3 * 2/3 * 1/3
+// third example, 6/5 would now be 5/4, which would be calculated next:
+// 56 and 456 or 1234 56 and 456 or 1234 56 and 123 456 or 56 and 123 456
+// 1/3 * 1/2 + 2/3 * 1/3 * 1/2 + 2/3 * 1/3 * 1/2 * 1/2 + 1/3 * 1/2 * 1/2
+// fourth example, 6/4 would now be 5/3, which would be calculated next:
+// 56 and 3456 or 1234 56 and 3456 or 1234 56 and 12 3456 or 56 and 12 3456
+// 1/3 * 2/3 + 2/3 * 1/3 * 2/3 + 2/3 * 1/3 * 1/3 * 2/3 + 1/3 * 1/3 * 2/3
+function two_handed_reroll_all_wound_chart() {
+    
+    let factor = 1
+    if (enemy_defence - 8 >= own_strength) {
+        factor = 0
+    }
+    else if (enemy_defence - 7 == own_strength) {
+        factor = 25/81
+    }
+    else if (enemy_defence - 6 == own_strength) {
+        factor = 5/12
+    }
+    else if (enemy_defence - 5 == own_strength) {
+        factor = 40/81
+    }
+    else if (enemy_defence - 4 == own_strength) {
+        factor = 5/9
+    }
+    else if (enemy_defence - 3 == own_strength) {
+        factor = 5/9
+    }
+    else if (enemy_defence - 2 == own_strength) {
+        factor = 3/4
+    }
+    else if (enemy_defence - 1 == own_strength) {
+        factor = 3/4
+    }
+    else if (enemy_defence - 0 == own_strength) {
+        factor = 8/9
+    }
+    else if (enemy_defence + 1 == own_strength) {
+        factor = 8/9
+    }
+    else if (enemy_defence + 2 == own_strength) {
+        factor = 35/36
+    }
+    else {
+        factor = 35/36
     }
     return factor
 }
