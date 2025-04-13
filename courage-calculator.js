@@ -1,4 +1,9 @@
 
+
+// initiate values in website
+document.getElementById("courage-slider").value = 4
+document.getElementById("will-points-slider").value = 0
+
 // these are the basic variables needed for the calculation
 var own_courage_base_value = 4
 var ancient_evil_is_on = false

@@ -34,11 +34,14 @@ main {
 
 .own-stats {
     margin: 0 5vw 0 0;
-    font-size: 0.9em;
 }
 
-.enemy-stats {
-    font-size: 0.9em;
+.own-stats p {
+    font-size: 1.1em;
+}
+
+.enemy-stats p {
+    font-size: 1.1em;
 }
 
 .buttons {

@@ -1,4 +1,10 @@
 
+// initiate website values
+document.getElementById("own-attacks-slider").value = 3
+document.getElementById("own-strength-slider").value = 4
+document.getElementById("enemy-defence-slider").value = 6
+document.getElementById("enemy-strength-slider").value = 4
+
 // needed global variables
 var own_attacks = 5
 var own_strength = 5

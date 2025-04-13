@@ -1,10 +1,15 @@
-var spell_works_minimum = 1
-var attacker_dice_amount = 4
-var defender_dice_amount = 3
+let spell_works_minimum = 2
+let amount_of_failing_dice = 5
+let attacker_dice_amount = 4
+let defender_dice_amount = 3
+
+// initiate values
+document.getElementById("spell-works-button").innerHTML = 3
+document.getElementById("attacker-dice-slider").value = 2
+document.getElementById("defender-dice-slider").value = 1
 
 change_attacker_dice()
 change_defender_dice()
-spell_works_button_click()
 spell_works_button_click()
 calculate()
 
@@ -70,21 +75,29 @@ function skilled_vs_weak(skilled_dice, weak_dice) {
     return answer
 }
 
-// in this case only thing that matters is to get max dice value which is as high or higher than the minimum required for spell to work
+// if enemy wont try to resist the spell, use this function
+// which is as high or higher than the minimum required for spell to work
 // calculate probability to succeed in spell by using complement
-function only_attacks_matter() {
-    let probability_to_succeed = 0
-    probability_to_succeed = 1 - (((spell_works_minimum - 1) / 6) ** attacker_dice_amount)
+// e.g caster uses 3 dices and need 5 to get the spell through
+// probability to not get the spell through is is same as getting 1 or 2 or 3 or 4 thrice
+// (4/6)^3 = probability to fail and not get spell through
+// therefore, probability to get spell through is 1 - (4/6)^3
+// for computing, u can solve this next:
+// amount of failing dice = spell requirement - 1
+// 1 - (amount_of_failing_dice/6)^attacker_dice_amount
+function enemy_has_no_magic_resistance() {
+    amount_of_failing_dice = spell_works_minimum - 1
+    let probability_to_fail = (amount_of_failing_dice/6) ** attacker_dice_amount
+    let probability_to_succeed = 1 - probability_to_fail
     return probability_to_succeed
 }
 
 
-// this function takes answer from the modified skilled_vs_weak() function.
-// but in case defender does not have any dice this function uses another function called "only_attacks_matter()"
+// depending if enemy tries to resist the spell, use modified skilled_vs_weak or enemy_has_no_magic_resistance"
 function probability_to_get_magic_through() {
     let attacker_wins = 0
     if (defender_dice_amount == 0) {
-        attacker_wins = only_attacks_matter()
+        attacker_wins = enemy_has_no_magic_resistance()
     }
     else {
         answer = skilled_vs_weak(defender_dice_amount, attacker_dice_amount)
@@ -93,6 +106,7 @@ function probability_to_get_magic_through() {
     return attacker_wins
 }
 
+// every time calculate button is pressed, run this
 function calculate() {
     change_attacker_dice()
     change_defender_dice()

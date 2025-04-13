@@ -9,14 +9,16 @@ main {
     font-size: 1.2em;
 }
 
+.sliders{
+    margin: 5vh 0 0 2vw;
+    position: relative;
+}
+
 .sliders p {
     margin: 1vh 0 0 0;
     font-size: 1.1em;
 }
 
-.sliders{
-    margin: 5vh 0 0 2vw;
-}
 
 #calculate {
     position: absolute;
@@ -25,9 +27,11 @@ main {
     font-size: 1.3em;
 }
 
+
 .buttons {
     margin: 3vh 0 0 1vw;
 }
+
 
 .buttons button{
     padding: 1vh 1vh;
@@ -35,16 +39,34 @@ main {
     font-size: 1.1em;
 }
 
+#info_icon {
+    width: 50px;
+    position: absolute;
+    right: 20%;
+    top: -50px;
+}
+
+#info_icon:active + .hidden {
+    display: block;
+}
+
+#info_icon:hover + .hidden {
+    display: block;
+}
+
+
 .hidden {
     display: none;
 }
 
 .infobox {
     border: 1px solid black;
+    background-color:brown;
     position: absolute;
-    top: 40%;
     left: 20%;
     padding: 10px;
+    margin-left: 60px;
+    margin-top: -20px;
 }
 
 
@@ -90,5 +112,14 @@ main {
     #calculate {
         margin: 10vh 0 0 56vw;
 
+    }
+
+    #info_icon {
+        position: absolute;
+        top: 50px;
+    }
+
+    .infobox {
+        margin-right: 10px;
     }
 }

@@ -5,7 +5,94 @@
 // which was the original calculator for this dilemma.
 
 
-// THE PROGRAM BEGINS:
+// FETCH WEBSITE VARIABLES AND UPDATE THEIR CORRESPONDING VALUES:
+//---------------------------------------------------------------------------------------
+
+// this inputs.js file receives inputs from html and then sends
+// the inputs to calculator.js file
+
+// these are variables to be used inside calculator.js file, but elven_sword also affects color of buttons
+let A_dice_amount = 0
+let A_fight = 0
+let A_elven_sword_is_on = false
+
+let B_dice_amount = 0
+let B_fight = 0
+let B_elven_sword_is_on = false
+
+// initiate values in website
+document.getElementById("slider-A-dice").value = 3
+document.getElementById("slider-A-fight").value = 3
+document.getElementById("slider-B-dice").value = 2
+document.getElementById("slider-B-fight").value = 4
+
+
+// activate the functions instantly so that the website looks proper immediately
+slider_A_dice_change_click()
+slider_A_fight_change_click()
+slider_B_dice_change_click()
+slider_B_fight_change_click()
+
+
+// function for opponent A dice amount
+function slider_A_dice_change_click() {
+    A_dice_amount = document.getElementById("slider-A-dice").value
+    document.getElementById("text-A-dice").innerHTML = `Dice-Amount: ${A_dice_amount}`
+    return 
+}
+
+
+// function for opponent A fight value
+function slider_A_fight_change_click() {
+    A_fight = document.getElementById("slider-A-fight").value
+    document.getElementById("text-A-fight").innerHTML = `Fight-Value: ${A_fight}`
+    return
+}
+
+
+// function for opponent B dice amount
+function slider_B_dice_change_click() {
+    B_dice_amount = document.getElementById("slider-B-dice").value
+    document.getElementById("text-B-dice").innerHTML = `Dice-Amount: ${B_dice_amount}`
+    return 
+}
+
+
+// function for opponent B fight value
+function slider_B_fight_change_click() {
+    B_fight = document.getElementById("slider-B-fight").value
+    document.getElementById("text-B-fight").innerHTML = `Fight-Value: ${B_fight}`
+    return
+}
+
+
+// function for clicking opponent A elven sword
+function button_A_elven_sword_click() {
+    if (A_elven_sword_is_on == true) {
+        document.getElementById("button-A-elven-sword").style.backgroundColor = 'white'
+        A_elven_sword_is_on = false
+    }
+    else if (A_elven_sword_is_on == false) {
+        document.getElementById("button-A-elven-sword").style.backgroundColor = 'green'
+        A_elven_sword_is_on = true
+    }
+}
+
+
+// function for clicking opponent B elven sword
+function button_B_elven_sword_click() {
+    if (B_elven_sword_is_on == true) {
+        document.getElementById("button-B-elven-sword").style.backgroundColor = 'white'
+        B_elven_sword_is_on = false
+    }
+    else if (B_elven_sword_is_on == false) {
+        document.getElementById("button-B-elven-sword").style.backgroundColor = 'green'
+        B_elven_sword_is_on = true
+    }
+}
+
+
+// THE CALCULATION PROGRAM BEGINS:
 //---------------------------------------------------------------------------------------
 
 // factorial() is needed to be made manually to calcolate factorializations
@@ -19,8 +106,8 @@ function factorial(num) {
 }
 
 
-// skilled_vs_weak() function returns 2 probabilities: (skilled_win, weak_win) = (higher fight value opponent wins, lower fight value opponent wins).
-// SEARCH THE PYTHON FILE FOR MORE INFORMATION ABOUT THE MATHEMATICAL FOUNDATION OF THIS FUNCTION!
+// skilled_vs_weak() function uses binomial probability to find out 2 probabilities: 
+// (skilled_win, weak_win) = (higher fight value opponent wins, lower fight value opponent wins).
 function skilled_vs_weak(skilled_dice, weak_dice) {
     let probability_per_round = 0
     let weak_wins = 0
@@ -102,6 +189,9 @@ function activate_calculation() {
     calculate_answer(A_dice_amount, A_fight, A_elven_sword_is_on, B_dice_amount, B_fight, B_elven_sword_is_on)
 }
 
+// run calculation at init of page, so always has correct value
+activate_calculation()
+
 // this function has 3 separate ifs: A has higher F, B has higher F or both have equal F:
 // answer here are stored to variable winner_list
 function calculate_answer(A_dice_amount, A_fight, A_elven_sword_is_on, B_dice_amount, B_fight, B_elven_sword_is_on) {
@@ -130,27 +220,9 @@ function calculate_answer(A_dice_amount, A_fight, A_elven_sword_is_on, B_dice_am
     }
     A_and_B["Opponent_A"] = winner_list[0]
     A_and_B["Opponent_B"] = winner_list[1]
-    print_answer()
 
-}
-
-function print_answer() {
     console.log(`Calculation completed! A wins: ${A_and_B["Opponent_A"]} and B wins: ${A_and_B["Opponent_B"]}`)
     document.getElementById("answer1").innerHTML = `Probability that A wins: ${parseFloat((A_and_B["Opponent_A"] * 100).toFixed(2))}%`
     document.getElementById("answer2").innerHTML = `Probability that B wins: ${parseFloat((A_and_B["Opponent_B"] * 100).toFixed(2))}%`
 
-}
-
-
-
-
-// this function is just to test the calculator functions in case need arise
-function tester() {
-    console.log(skilled_vs_weak(2, 2))
-    console.log(skilled_vs_weak(4, 2))
-    console.log(skilled_vs_weak(2, 4))
-    console.log(skilled_vs_weak(4, 8))
-    console.log(equal_vs_equal(2, false, 2, false))
-    console.log(equal_vs_equal(2, false, 4, true))
-    console.log(equal_vs_equal(2, true, 4, false))
 }

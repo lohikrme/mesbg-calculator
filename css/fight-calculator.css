@@ -60,6 +60,7 @@ button {
     width: 50vw;
     max-width: 200px;
     padding: 0 0 0 2vw;
+    margin-left: 10px;
 }
 
 .A p {
@@ -68,10 +69,11 @@ button {
 
 .A h2 {
     padding: 1vh 0 1vh 2vh;
+    margin-left: -1vw;
 }
 
 .A button {
-    margin: 3vh 0 0 1vw;
+    margin: 3vh 0 0 0;
 }
 
 
@@ -83,6 +85,7 @@ button {
 
 .B h2 {
     padding: 1vh 0 1vh 2vh;
+    margin-left: -1vw;
 }
 
 .B p {
