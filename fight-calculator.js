@@ -97,11 +97,10 @@ function button_B_elven_sword_click() {
     }
 }
 
+// CALCULATE PROBABILITY VALUES
+// -----------------------------------------------------------------------------------------------
 
-// THE CALCULATION PROGRAM BEGINS:
-//---------------------------------------------------------------------------------------
-
-// factorial() is needed to be made manually to calcolate factorializations
+// factorial() is needed as js does not have factorial in its library
 function factorial(num) {
     if (num === 0 || num === 1)
         return 1;
@@ -114,6 +113,10 @@ function factorial(num) {
 
 // skilled_vs_weak() function uses binomial probability to find out 2 probabilities: 
 // (skilled_win, weak_win) = (higher fight value opponent wins, lower fight value opponent wins).
+// idea is that weak wins happen only via absolutely higher rolls. 
+// e.g u cant win as weak by getting 5 if enemy also gets 5, u must get 6
+// then, after we know how much weak wins, we know skilled wins all else
+// including stalemate rolls such as 6-6 or 5-5, and also if skilled rolls higher
 function skilled_vs_weak(skilled_dice, weak_dice) {
     let probability_per_round = 0
     let weak_wins = 0
@@ -134,8 +137,15 @@ function skilled_vs_weak(skilled_dice, weak_dice) {
     return answer
 }
 
-// equal_vs_equal() function returns 2 probabilities: left side opponent wins, right side opponent wins.
-// SEARCH THE PYTHON FILE FOR MORE INFORMATION ABOUT THE MATHEMATICAL FOUNDATION OF THIS FUNCTION!
+// equal_vs_equal() function returns 2 probabilities: left side wins, right side wins.
+// idea is that we use the skilled_vs_function first
+// if we take "weak_wins" score for both A and B, then we know all situations
+// where A and B win with absolutely higher dice roll, e.g 555 vs 611 6 wins
+// then we remove these wins from 1
+// imagine A wins 40% and B wins 50% of duels with a higher dice roll
+// then the remaining 10% of rolls end up as a stalemate
+// so we use the info of possible elven swords to see how that remainder is split 
+// base situation it is 50% win for either side, but elven sword makes that 4/6 chance...
 function equal_vs_equal(left_dice, left_elven_sword, right_dice, right_elven_sword) {
     let left_opponent_wins = 0
     let right_opponent_wins = 0
@@ -173,12 +183,7 @@ function equal_vs_equal(left_dice, left_elven_sword, right_dice, right_elven_swo
 }
 
 
-// this final area does the practical calculation 
-// these variables are the ones to return to html file
-// and calculate_answer() function gives value to the variables
-// elements are also listened because button  "calculate" has 2 effects
-
-// this function gets an onclick input from html and activates the calculator
+// ACTIVATE THE CALCULATION
 function activate_calculation() {
     console.log("Calculation begins...")
     console.log(`Opponent A dice-amount: ${A_dice_amount}`)
