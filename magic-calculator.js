@@ -1,12 +1,15 @@
-let spell_works_minimum = 2
-let amount_of_failing_dice = 5
-let attacker_dice_amount = 4
-let defender_dice_amount = 3
 
-// initiate values
+// initiate variables
+let spell_works_minimum = 0
+let attacker_dice_amount = 0
+let attacker_might = 0
+let defender_dice_amount = 0
+let defender_might = 0
+
+// make sure website shows instantly suitable
 document.getElementById("spell-works-button").innerHTML = 3
-document.getElementById("attacker-dice-slider").value = 2
-document.getElementById("defender-dice-slider").value = 1
+document.getElementById("attacker-dice-slider").value = 3
+document.getElementById("defender-dice-slider").value = 2
 
 change_attacker_dice()
 change_defender_dice()
@@ -37,6 +40,32 @@ function change_defender_dice() {
     document.getElementById("defender-dice-text").innerHTML = `Dice to resist the spell: ${new_defender_dice_amount}`
 }
 
+// function for attacker might value update
+function attacker_might_click() {
+    let might_point_value = parseInt(document.getElementById("button-attacker-might").innerHTML)
+    if (might_point_value < 3) {
+        might_point_value += 1
+    }
+    else {
+        might_point_value = 0
+    }
+    attacker_might = might_point_value
+    document.getElementById("button-attacker-might").innerHTML = might_point_value
+}
+
+// function for defender might value update
+function defender_might_click() {
+    let might_point_value = parseInt(document.getElementById("button-defender-might").innerHTML)
+    if (might_point_value < 3) {
+        might_point_value += 1
+    }
+    else {
+        might_point_value = 0
+    }
+    defender_might = might_point_value
+    document.getElementById("button-defender-might").innerHTML = might_point_value
+}
+
 // factorial() is needed to be made manually to calculate factorializations
 function factorial(num) {
     if (num === 0 || num === 1)
@@ -47,73 +76,83 @@ function factorial(num) {
     return num;
 }
 
-// skilled_vs_weak() function returns 2 probabilities: (skilled_win, weak_win) = (higher fight value opponent wins, lower fight value opponent wins).
-// this function is taken from fight calculator and modified just a bit. Logic is that defender is basically "higher fight value",
-// because defender wins on rolls such as 55 and 55. Just need to consider that the attacker need to reach at least minimum requirement.
-// SEARCH THE PYTHON FILE FOR MORE INFORMATION ABOUT THE MATHEMATICAL FOUNDATION OF THIS FUNCTION!
-
-// So, this function basically runs through loops, where first loop is about winning with 6, 5, 4, 3, 2.
-// we can use these loops for our help. Because it means that if weaker wins with for example 3 or 2, while spell
-// requires 4, then it is impossible. So we modify this function to go only that much inner loops that
-// the required dice minimum for spell to work is fullfilled.
-function skilled_vs_weak(skilled_dice, weak_dice) {
-    let probability_per_round = 0
+// if enemy tries to resist the spell, use the modified skilled_vs_weak function
+// skilled_vs_weak function works, because rules are basically the same as in fight phase for casting spells
+// the resister is always considered to have a higher fight value (wins on stalemate)
+// only modification needed is that, the dice of caster must be minimum of the score required by the spell
+// otherwise just assume attacker/caster as weak and defender/resister as skilled
+function skilled_vs_weak(skilled_dice_count, skilled_might, weak_dice_count, weak_might) {
+    let probability_per_loop = 0
     let weak_wins = 0
-    let skilled_wins = 0
-    let answer = []
-    for (winning_dice_minus1 = 5; winning_dice_minus1 > 0; winning_dice_minus1--) {
-        for (round_inside = 1; round_inside < weak_dice + 1; round_inside++) {
-            probability_per_round = ((1 / 6) ** round_inside * (winning_dice_minus1 / 6) ** (weak_dice - round_inside)) * ((factorial(weak_dice)) / (factorial(round_inside) * factorial(weak_dice - round_inside))) * (winning_dice_minus1 / 6) ** skilled_dice
-            if (winning_dice_minus1 + 1 >= spell_works_minimum) {
-                weak_wins += probability_per_round
+    let answer = {}
+    // first loop is from 6 to 1, meaning does weak win with 6s, 5s, 4s, 3s, 2s, 1s
+    // notice that 1s means, weak can only win if they have might
+    for (let winning_value = 6; winning_value >= 1; winning_value--) {
+        // second loop is from 1 to weak_dice_count, e.g from 1 to 3
+        // because weak can win with 1x 6s, 2x 6s, 3x 6s, 1x 5s, 2x 5s, 3x 5s... 1x 2s, 2x 2s or 3x 2s
+        for (let dice_count_of_winning_value = 1; dice_count_of_winning_value <= weak_dice_count; dice_count_of_winning_value++) {
+            // step 1: chance of getting dice_count_of_winning_value of winning_values
+            probability_per_loop = (1/6)**dice_count_of_winning_value
+
+            // step 2: other rolls when the weak side wins with the previous winning_values and winning_dice_rolls
+            probability_per_loop *= ((winning_value - 1)/6)**(weak_dice_count-dice_count_of_winning_value)
+
+            // step 3: consider all permutations for weak side dice
+            probability_per_loop *= (factorial(weak_dice_count) / 
+            (factorial(dice_count_of_winning_value)*factorial(weak_dice_count-dice_count_of_winning_value)))
+
+            // step 4: any dices the skilled side can roll so weak side still wins
+            // also make sure that winning_value + effective_weak_might >= requirement
+            effective_weak_might = Math.min(6-winning_value, weak_might)
+            if (winning_value + effective_weak_might < spell_works_minimum) {
+                probability_per_loop = 0
+                continue
             }
+            skilled_losing_dice_value = Math.max(0, winning_value - 1 - skilled_might + effective_weak_might)
+            probability_per_loop *= ((skilled_losing_dice_value)/6)**skilled_dice_count
+            
+            // step 5: save the probability of this loop to cumulative probability of weak side wins
+            weak_wins += probability_per_loop
         }
     }
-    skilled_wins = 1 - weak_wins
-    answer.push(skilled_wins)
-    answer.push(weak_wins)
+    answer["skilled_wins"] = 1 - weak_wins
+    answer["weak_wins"] = weak_wins
     return answer
 }
 
 // if enemy wont try to resist the spell, use this function
-// which is as high or higher than the minimum required for spell to work
-// calculate probability to succeed in spell by using complement
-// e.g caster uses 3 dices and need 5 to get the spell through
-// probability to not get the spell through is is same as getting 1 or 2 or 3 or 4 thrice
-// (4/6)^3 = probability to fail and not get spell through
+// e.g caster uses 3 dices and needs 5 to get the spell through
+// probability is the same as NOT getting just rolls between 1 and 4
 // therefore, probability to get spell through is 1 - (4/6)^3
-// for computing, u can solve this next:
-// amount of failing dice = spell requirement - 1
-// 1 - (amount_of_failing_dice/6)^attacker_dice_amount
 function enemy_has_no_magic_resistance() {
-    amount_of_failing_dice = spell_works_minimum - 1
+    let amount_of_failing_dice = spell_works_minimum - 1
     let probability_to_fail = (amount_of_failing_dice/6) ** attacker_dice_amount
-    let probability_to_succeed = 1 - probability_to_fail
-    return probability_to_succeed
+    return 1 - probability_to_fail
 }
 
-
-// depending if enemy tries to resist the spell, use modified skilled_vs_weak or enemy_has_no_magic_resistance"
+// combine no-resist and resist versions under one function
 function probability_to_get_magic_through() {
     let attacker_wins = 0
     if (defender_dice_amount == 0) {
         attacker_wins = enemy_has_no_magic_resistance()
     }
     else {
-        answer = skilled_vs_weak(defender_dice_amount, attacker_dice_amount)
-        attacker_wins = answer[1]
+        answer = skilled_vs_weak(defender_dice_amount, defender_might, attacker_dice_amount, attacker_might)
+        attacker_wins = answer["weak_wins"]
     }
     return attacker_wins
 }
 
-// every time calculate button is pressed, run this
+// every time calculate button is pressed, let user know probability to get the spell through
 function calculate() {
     change_attacker_dice()
     change_defender_dice()
     console.log("Spell works on minimum value of: " + spell_works_minimum + ".")
     console.log(`Attacker has ${attacker_dice_amount} dice to cast the spell.`)
     console.log(`Defender has ${defender_dice_amount} dice to resist the spell.`)
+    console.log(`Attacker has ${attacker_might} might to improve dice rolls.`)
+    console.log(`Defender has ${defender_might} might to improve dice rolls.`)
     answer = probability_to_get_magic_through()
-    console.log(answer)
+    console.log(`The calculation has been completed! \nThe probability that the spell goes through is... \n${parseFloat(answer * 100).toFixed(2)}%`)
     document.getElementById("answer").innerHTML = `The probability that the spell goes in and works is: ${parseFloat(answer * 100).toFixed(2)}%`
 }

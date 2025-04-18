@@ -173,7 +173,6 @@ function skilled_vs_weak(skilled_dice_count, skilled_might, weak_dice_count, wea
     }
     answer["skilled_wins"] = 1 - weak_wins
     answer["weak_wins"] = weak_wins
-    console.log(answer)
     return answer
 }
 

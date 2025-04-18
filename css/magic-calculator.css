@@ -33,3 +33,43 @@ p {
 }
 
 .wrap p {}
+
+.might-button {
+    margin-top: 4px;
+    margin-left: 2vw;
+}
+
+.might-button {
+    margin-top: 4px;
+    margin-left: 2vw;
+}
+
+.might-button {
+    width: 5vw;
+    height: 3vw;
+    font-size: 1.4em;
+    min-width: 70px;
+    min-height: 40px;
+}
+
+.might-button:hover {
+    background-color: #b79a49;
+}
+
+
+@media screen and (max-width: 830px) {
+
+
+    .wrap {
+        padding-left: 10px;
+    }
+
+    .might-button {
+        margin: 10px 0px 10px 20px;
+    }
+
+    .might-button {
+        margin: 10px 0px 10px 20px;
+    }
+    
+}

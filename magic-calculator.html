@@ -33,7 +33,13 @@
             <input id="attacker-dice-slider" type="range" min="1" max="6" oninput="change_attacker_dice()">
             <br>
             <p id="defender-dice-text">Dice to resist the spell:</p>
-            <input id="defender-dice-slider" type="range" min="0" max="6" oninput="change_defender_dice()">
+            <input id="defender-dice-slider" type="range" min="0" max="6" oninput="change_defender_dice()">        
+            <br>
+            <br>
+            <p>Attacker might:</p>
+            <button id="button-attacker-might" class="might-button" onclick="attacker_might_click()">0</button>
+            <p>Defender might:</p>
+            <button id="button-defender-might" class="might-button" onclick="defender_might_click()">0</button>
         </div>
     </main>
 
