@@ -99,6 +99,7 @@ function button_B_elven_sword_click() {
 
 // CALCULATE PROBABILITY VALUES
 // -----------------------------------------------------------------------------------------------
+// please refer to "mathematical-background.py if something is unclear"
 
 // factorial() is needed as js does not have factorial in its library
 function factorial(num) {
@@ -120,7 +121,6 @@ function factorial(num) {
 function skilled_vs_weak(skilled_dice, weak_dice) {
     let probability_per_round = 0
     let weak_wins = 0
-    let skilled_wins = 0
     let answer = {}
     for (winning_dice_minus1 = 5; winning_dice_minus1 > 0; winning_dice_minus1--) {
         for (round_inside = 1; round_inside < weak_dice + 1; round_inside++) {
@@ -131,8 +131,7 @@ function skilled_vs_weak(skilled_dice, weak_dice) {
             weak_wins += probability_per_round
         }
     }
-    skilled_wins = 1 - weak_wins
-    answer["skilled_wins"] = skilled_wins
+    answer["skilled_wins"] = 1 - weak_wins
     answer["weak_wins"] = weak_wins
     return answer
 }
