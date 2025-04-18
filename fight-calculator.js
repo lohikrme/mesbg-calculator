@@ -20,6 +20,12 @@ let B_dice_amount = 0
 let B_fight = 0
 let B_elven_sword_is_on = false
 
+// this dictionary stores chance A or B wins
+let A_and_B = {
+    Opponent_A: 0.5,
+    Opponent_B: 0.5
+}
+
 // initiate values in website
 document.getElementById("slider-A-dice").value = 3
 document.getElementById("slider-A-fight").value = 3
@@ -112,16 +118,19 @@ function skilled_vs_weak(skilled_dice, weak_dice) {
     let probability_per_round = 0
     let weak_wins = 0
     let skilled_wins = 0
-    let answer = []
+    let answer = {}
     for (winning_dice_minus1 = 5; winning_dice_minus1 > 0; winning_dice_minus1--) {
         for (round_inside = 1; round_inside < weak_dice + 1; round_inside++) {
-            probability_per_round = ((1 / 6) ** round_inside * (winning_dice_minus1 / 6) ** (weak_dice - round_inside)) * ((factorial(weak_dice)) / (factorial(round_inside) * factorial(weak_dice - round_inside))) * (winning_dice_minus1 / 6) ** skilled_dice
+            probability_per_round = ((1 / 6) ** round_inside * 
+                (winning_dice_minus1 / 6) ** (weak_dice - round_inside)) * 
+                ((factorial(weak_dice)) / (factorial(round_inside) * factorial(weak_dice - round_inside))) * 
+                (winning_dice_minus1 / 6) ** skilled_dice
             weak_wins += probability_per_round
         }
     }
     skilled_wins = 1 - weak_wins
-    answer.push(skilled_wins)
-    answer.push(weak_wins)
+    answer["skilled_wins"] = skilled_wins
+    answer["weak_wins"] = weak_wins
     return answer
 }
 
@@ -130,10 +139,10 @@ function skilled_vs_weak(skilled_dice, weak_dice) {
 function equal_vs_equal(left_dice, left_elven_sword, right_dice, right_elven_sword) {
     let left_opponent_wins = 0
     let right_opponent_wins = 0
-    let answer = []
+    let answer = {}
 
-    left_opponent_wins = skilled_vs_weak(right_dice, left_dice)[1]
-    right_opponent_wins = skilled_vs_weak(left_dice, right_dice)[1]
+    left_opponent_wins = skilled_vs_weak(right_dice, left_dice)["weak_wins"]
+    right_opponent_wins = skilled_vs_weak(left_dice, right_dice)["weak_wins"]
 
     stalemate = 1 - left_opponent_wins - right_opponent_wins
 
@@ -157,8 +166,9 @@ function equal_vs_equal(left_dice, left_elven_sword, right_dice, right_elven_swo
         left_opponent_wins += stalemate * (1 / 2)
         stalemate = 0
     }
-    answer.push(left_opponent_wins)
-    answer.push(right_opponent_wins)
+    answer["left_wins"] = left_opponent_wins
+    answer["right_wins"] = right_opponent_wins
+    console.log(answer)
     return answer
 }
 
@@ -167,15 +177,6 @@ function equal_vs_equal(left_dice, left_elven_sword, right_dice, right_elven_swo
 // these variables are the ones to return to html file
 // and calculate_answer() function gives value to the variables
 // elements are also listened because button  "calculate" has 2 effects
-
-// dict for winning % and base values, also a list to save values for later use
-var A_and_B = {
-    Opponent_A: 0.5,
-    Opponent_B: 0.5
-}
-
-var winner_list = []
-
 
 // this function gets an onclick input from html and activates the calculator
 function activate_calculation() {
@@ -192,34 +193,24 @@ function activate_calculation() {
 // run calculation at init of page, so always has correct value
 activate_calculation()
 
-// this function has 3 separate ifs: A has higher F, B has higher F or both have equal F:
-// answer here are stored to variable winner_list
+// this function has 3 separate ifs: A has higher Fight, B has higher Fight or both have equal Fight:
 function calculate_answer(A_dice_amount, A_fight, A_elven_sword_is_on, B_dice_amount, B_fight, B_elven_sword_is_on) {
     if (A_fight > B_fight) {
-        function case1() {
-            lista = skilled_vs_weak(A_dice_amount, B_dice_amount)
-            return [lista[0], lista[1]]
-        }
-        winner_list = case1()
-
+        answer = skilled_vs_weak(A_dice_amount, B_dice_amount)
+        A_and_B["Opponent_A"] = answer["skilled_wins"]
+        A_and_B["Opponent_B"] = answer["weak_wins"]
     }
-    else if (B_fight > A_fight) {
-        function case2() {
-            lista = skilled_vs_weak(B_dice_amount, A_dice_amount)
-            return [lista[1], lista[0]]
-        }
-        winner_list = case2()
+    else if (A_fight < B_fight) {
+        answer = skilled_vs_weak(B_dice_amount, A_dice_amount)
+        A_and_B["Opponent_A"] = answer["weak_wins"]
+        A_and_B["Opponent_B"] = answer["skilled_wins"]
     }
 
     else if (A_fight == B_fight) {
-        function case3() {
-            lista = equal_vs_equal(A_dice_amount, A_elven_sword_is_on, B_dice_amount, B_elven_sword_is_on)
-            return [lista[0], lista[1]]
-        }
-        winner_list = case3()
+        answer = equal_vs_equal(A_dice_amount, A_elven_sword_is_on, B_dice_amount, B_elven_sword_is_on)
+        A_and_B["Opponent_A"] = answer["left_wins"]
+        A_and_B["Opponent_B"] = answer["right_wins"]
     }
-    A_and_B["Opponent_A"] = winner_list[0]
-    A_and_B["Opponent_B"] = winner_list[1]
 
     console.log(`Calculation completed! A wins: ${A_and_B["Opponent_A"]} and B wins: ${A_and_B["Opponent_B"]}`)
     document.getElementById("answer1").innerHTML = `Probability that A wins: ${parseFloat((A_and_B["Opponent_A"] * 100).toFixed(2))}%`
