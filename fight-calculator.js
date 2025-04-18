@@ -155,9 +155,14 @@ function skilled_vs_weak(skilled_dice_count, skilled_might, weak_dice_count, wea
             // step 4: any dices the skilled side can roll so weak side still wins
             // notice that (0/6)^n is not an error, it simply means that the
             // the weak side tries to win with 1s or the skilled side has some might
-            // e.g weak tries win with 3s, but skilled uses 2 might...
-            // that would mean skilled needs to roll 0 so that weak can win with 3s
-            // but that is impossible, therefore the prob per loop will be 0
+            // functionality can be explained best by example. imagine that both sides use 4 might.
+            // and we are at the loop, where we test if we win with 3s
+            // in that situation, normally weak wins with 3 if skilled rolls 1 or 2 (2/6)
+            // but now weak dice value goes to 3 + (6-3) = 6
+            // so as long as enemy roll + might = 5 or less, weak wins
+            // but that means, the roll which allows weak to win is...
+            // winning_value - 1 - skilled_might + effective_weak_might
+            // = 3 - 1 - 4 + 3 = 1... the skilled needs to roll only 1s or skilled wins
             effective_weak_might = Math.min(6-winning_value, weak_might)
             skilled_losing_dice_value = Math.max(0, winning_value - 1 - skilled_might + effective_weak_might)
             probability_per_loop *= ((skilled_losing_dice_value)/6)**skilled_dice_count
