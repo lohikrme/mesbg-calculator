@@ -93,7 +93,30 @@ button {
 }
 
 .B button {
-    margin: 3vh 0 0 1vw;
+    margin: 3vh 0 0 0;
+    align-items: center;
+}
+
+.A .might-button {
+    margin-top: 4px;
+    margin-left: 2vw;
+}
+
+.B .might-button {
+    margin-top: 4px;
+    margin-left: 2vw;
+}
+
+.might-button {
+    width: 5vw;
+    height: 3vw;
+    font-size: 1.4em;
+    min-width: 70px;
+    min-height: 40px;
+}
+
+.might-button:hover {
+    background-color: #b79a49;
 }
 
 
@@ -119,7 +142,7 @@ button {
     }
     
     .A {
-        height: 32vh;
+        height: 50vh;
         min-width: 100%;
         padding: 0 0 0 4vw;
         margin-top: 25px;
@@ -132,7 +155,7 @@ button {
     
     
     .B {
-        height: 32vh;
+        height: 50vh;
         min-width: 100%;
         padding: 0 0 0 4vw;
         margin-top: 15px;
@@ -155,6 +178,14 @@ button {
 
     .fight-calculator-background {
         margin: 5vh 0 0 5vw;
+    }
+
+    .A .might-button {
+        margin: 10px 0px 10px 20px;
+    }
+
+    .B .might-button {
+        margin: 10px 0px 10px 20px;
     }
     
 }

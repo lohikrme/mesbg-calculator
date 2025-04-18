@@ -14,10 +14,12 @@
 // these are variables to be used inside calculator.js file, but elven_sword also affects color of buttons
 let A_dice_amount = 0
 let A_fight = 0
+let A_might = 0
 let A_elven_sword_is_on = false
 
 let B_dice_amount = 0
 let B_fight = 0
+let B_might = 0
 let B_elven_sword_is_on = false
 
 // this dictionary stores chance A or B wins
@@ -72,6 +74,31 @@ function slider_B_fight_change_click() {
 }
 
 
+function button_A_might_click() {
+    let might_point_value = parseInt(document.getElementById("button-A-might").innerHTML)
+    if (might_point_value < 3) {
+        might_point_value += 1
+    }
+    else {
+        might_point_value = 0
+    }
+    A_might = might_point_value
+    document.getElementById("button-A-might").innerHTML = might_point_value
+}
+
+function button_B_might_click() {
+    let might_point_value = parseInt(document.getElementById("button-B-might").innerHTML)
+    if (might_point_value < 3) {
+        might_point_value += 1
+    }
+    else {
+        might_point_value = 0
+    }
+    B_might = might_point_value
+    document.getElementById("button-B-might").innerHTML = might_point_value
+}
+
+
 // function for clicking opponent A elven sword
 function button_A_elven_sword_click() {
     if (A_elven_sword_is_on == true) {
@@ -118,6 +145,7 @@ function factorial(num) {
 // e.g u cant win as weak by getting 5 if enemy also gets 5, u must get 6
 // then, after we know how much weak wins, we know skilled wins all else
 // including stalemate rolls such as 6-6 or 5-5, and also if skilled rolls higher
+
 function skilled_vs_weak(skilled_dice, weak_dice) {
     let probability_per_round = 0
     let weak_wins = 0
@@ -135,6 +163,10 @@ function skilled_vs_weak(skilled_dice, weak_dice) {
     answer["weak_wins"] = weak_wins
     return answer
 }
+    
+
+// version 2 skilled_vs_weak function
+// TODO
 
 // equal_vs_equal() function returns 2 probabilities: left side wins, right side wins.
 // idea is that we use the skilled_vs_function first
@@ -187,9 +219,11 @@ function activate_calculation() {
     console.log("Calculation begins...")
     console.log(`Opponent A dice-amount: ${A_dice_amount}`)
     console.log(`Opponent A fight-value: ${A_fight}`)
+    console.log(`Opponent A might-points: ${A_might}`)
     console.log(`Opponent A elven sword is: ${A_elven_sword_is_on}`)
     console.log(`Opponent B dice-amount: ${B_dice_amount}`)
     console.log(`Opponent B fight-value: ${B_fight}`)
+    console.log(`Opponent B might-points: ${B_might}`)
     console.log(`Opponent B elven sword is: ${B_elven_sword_is_on}`)
     calculate_answer(A_dice_amount, A_fight, A_elven_sword_is_on, B_dice_amount, B_fight, B_elven_sword_is_on)
 }
