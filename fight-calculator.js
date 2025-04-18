@@ -64,7 +64,7 @@ function slider_B_fight_change_click() {
 // function for opponent A might value update
 function button_A_might_click() {
     let might_point_value = parseInt(document.getElementById("button-A-might").innerHTML)
-    if (might_point_value < 3) {
+    if (might_point_value < 5) {
         might_point_value += 1
     }
     else {
@@ -77,7 +77,7 @@ function button_A_might_click() {
 // function for opponent B might value update
 function button_B_might_click() {
     let might_point_value = parseInt(document.getElementById("button-B-might").innerHTML)
-    if (might_point_value < 3) {
+    if (might_point_value < 5) {
         might_point_value += 1
     }
     else {
@@ -133,13 +133,12 @@ function factorial(num) {
 // we do loops for all different scenarios, from winning with 1 of 2s to winning with all 6s
 // see mathematical-background.py for more information
 function skilled_vs_weak(skilled_dice_count, skilled_might, weak_dice_count, weak_might) {
-    let might_difference = weak_might - skilled_might
     let probability_per_loop = 0
     let weak_wins = 0
     let answer = {}
-    // first loop is from 6 to 2, meaning does weak win with 6s, 5s, 4s, 3s, 2s
-    // when we add might, it will maybe go till 1s
-    for (let winning_value = 6; winning_value >= 2; winning_value--) {
+    // first loop is from 6 to 1, meaning does weak win with 6s, 5s, 4s, 3s, 2s, 1s
+    // notice that 1s means, weak can only win if they have might
+    for (let winning_value = 6; winning_value >= 1; winning_value--) {
         // second loop is from 1 to weak_dice_count, e.g from 1 to 3
         // because weak can win with 1x 6s, 2x 6s, 3x 6s, 1x 5s, 2x 5s, 3x 5s... 1x 2s, 2x 2s or 3x 2s
         for (let dice_count_of_winning_value = 1; dice_count_of_winning_value <= weak_dice_count; dice_count_of_winning_value++) {
@@ -153,10 +152,16 @@ function skilled_vs_weak(skilled_dice_count, skilled_might, weak_dice_count, wea
             probability_per_loop *= (factorial(weak_dice_count) / 
             (factorial(dice_count_of_winning_value)*factorial(weak_dice_count-dice_count_of_winning_value)))
 
-            // step 4: dices the skilled side must roll so weak side can win in this round
-            // e.g weak rolls 5s, so skilled rolls 1s 2s 3s or 4s aka 4/6
-            probability_per_loop *= ((winning_value - 1)/6)**skilled_dice_count
-
+            // step 4: any dices the skilled side can roll so weak side still wins
+            // notice that (0/6)^n is not an error, it simply means that the
+            // the weak side tries to win with 1s or the skilled side has some might
+            // e.g weak tries win with 3s, but skilled uses 2 might...
+            // that would mean skilled needs to roll 0 so that weak can win with 3s
+            // but that is impossible, therefore the prob per loop will be 0
+            effective_weak_might = Math.min(6-winning_value, weak_might)
+            skilled_losing_dice_value = Math.max(0, winning_value - 1 - skilled_might + effective_weak_might)
+            probability_per_loop *= ((skilled_losing_dice_value)/6)**skilled_dice_count
+            
             // step 5: save the probability of this loop to cumulative probability of weak side wins
             weak_wins += probability_per_loop
         }
