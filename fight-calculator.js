@@ -1,17 +1,5 @@
-// This file receives inputs from inputs.js and then calculates
-// the probabilities. 
+// initiate variables to store data
 
-// For more accurate information about mathematics, please check out the mesbg.calculator.py file
-// which was the original calculator for this dilemma.
-
-
-// FETCH WEBSITE VARIABLES AND UPDATE THEIR CORRESPONDING VALUES:
-//---------------------------------------------------------------------------------------
-
-// this inputs.js file receives inputs from html and then sends
-// the inputs to calculator.js file
-
-// these are variables to be used inside calculator.js file, but elven_sword also affects color of buttons
 let A_dice_amount = 0
 let A_fight = 0
 let A_might = 0
@@ -42,7 +30,7 @@ slider_B_dice_change_click()
 slider_B_fight_change_click()
 
 
-// function for opponent A dice amount
+// function for opponent A dice amount update
 function slider_A_dice_change_click() {
     A_dice_amount = document.getElementById("slider-A-dice").value
     document.getElementById("text-A-dice").innerHTML = `Dice-Amount: ${A_dice_amount}`
@@ -50,7 +38,7 @@ function slider_A_dice_change_click() {
 }
 
 
-// function for opponent A fight value
+// function for opponent A fight value update
 function slider_A_fight_change_click() {
     A_fight = document.getElementById("slider-A-fight").value
     document.getElementById("text-A-fight").innerHTML = `Fight-Value: ${A_fight}`
@@ -58,7 +46,7 @@ function slider_A_fight_change_click() {
 }
 
 
-// function for opponent B dice amount
+// function for opponent B dice amount update
 function slider_B_dice_change_click() {
     B_dice_amount = document.getElementById("slider-B-dice").value
     document.getElementById("text-B-dice").innerHTML = `Dice-Amount: ${B_dice_amount}`
@@ -66,14 +54,14 @@ function slider_B_dice_change_click() {
 }
 
 
-// function for opponent B fight value
+// function for opponent B fight value update
 function slider_B_fight_change_click() {
     B_fight = document.getElementById("slider-B-fight").value
     document.getElementById("text-B-fight").innerHTML = `Fight-Value: ${B_fight}`
     return
 }
 
-
+// function for opponent A might value update
 function button_A_might_click() {
     let might_point_value = parseInt(document.getElementById("button-A-might").innerHTML)
     if (might_point_value < 3) {
@@ -86,6 +74,7 @@ function button_A_might_click() {
     document.getElementById("button-A-might").innerHTML = might_point_value
 }
 
+// function for opponent B might value update
 function button_B_might_click() {
     let might_point_value = parseInt(document.getElementById("button-B-might").innerHTML)
     if (might_point_value < 3) {
@@ -99,7 +88,7 @@ function button_B_might_click() {
 }
 
 
-// function for clicking opponent A elven sword
+// function for updating opponent A elven sword
 function button_A_elven_sword_click() {
     if (A_elven_sword_is_on == true) {
         document.getElementById("button-A-elven-sword").style.backgroundColor = 'white'
@@ -112,7 +101,7 @@ function button_A_elven_sword_click() {
 }
 
 
-// function for clicking opponent B elven sword
+// function for updating opponent B elven sword
 function button_B_elven_sword_click() {
     if (B_elven_sword_is_on == true) {
         document.getElementById("button-B-elven-sword").style.backgroundColor = 'white'
@@ -128,7 +117,7 @@ function button_B_elven_sword_click() {
 // -----------------------------------------------------------------------------------------------
 // please refer to "mathematical-background.py if something is unclear"
 
-// factorial() is needed as js does not have factorial in its library
+// factorial() is needed to calculate permutations as js does not have factorial in its library
 function factorial(num) {
     if (num === 0 || num === 1)
         return 1;
@@ -137,78 +126,84 @@ function factorial(num) {
     }
     return num;
 }
+    
 
-
-// skilled_vs_weak() function uses binomial probability to find out 2 probabilities: 
-// (skilled_win, weak_win) = (higher fight value opponent wins, lower fight value opponent wins).
-// idea is that weak wins happen only via absolutely higher rolls. 
-// e.g u cant win as weak by getting 5 if enemy also gets 5, u must get 6
-// then, after we know how much weak wins, we know skilled wins all else
-// including stalemate rolls such as 6-6 or 5-5, and also if skilled rolls higher
-
-function skilled_vs_weak(skilled_dice, weak_dice) {
-    let probability_per_round = 0
+// skilled_vs_weak function finds out how high chance lower fight value opponent has to win
+// it uses loops to have more flexibility and control
+// we do loops for all different scenarios, from winning with 1 of 2s to winning with all 6s
+// see mathematical-background.py for more information
+function skilled_vs_weak(skilled_dice_count, skilled_might, weak_dice_count, weak_might) {
+    let might_difference = weak_might - skilled_might
+    let probability_per_loop = 0
     let weak_wins = 0
     let answer = {}
-    for (winning_dice_minus1 = 5; winning_dice_minus1 > 0; winning_dice_minus1--) {
-        for (round_inside = 1; round_inside < weak_dice + 1; round_inside++) {
-            probability_per_round = ((1 / 6) ** round_inside * 
-                (winning_dice_minus1 / 6) ** (weak_dice - round_inside)) * 
-                ((factorial(weak_dice)) / (factorial(round_inside) * factorial(weak_dice - round_inside))) * 
-                (winning_dice_minus1 / 6) ** skilled_dice
-            weak_wins += probability_per_round
+    // first loop is from 6 to 2, meaning does weak win with 6s, 5s, 4s, 3s, 2s
+    // when we add might, it will maybe go till 1s
+    for (let winning_value = 6; winning_value >= 2; winning_value--) {
+        // second loop is from 1 to weak_dice_count, e.g from 1 to 3
+        // because weak can win with 1x 6s, 2x 6s, 3x 6s, 1x 5s, 2x 5s, 3x 5s... 1x 2s, 2x 2s or 3x 2s
+        for (let dice_count_of_winning_value = 1; dice_count_of_winning_value <= weak_dice_count; dice_count_of_winning_value++) {
+            // step 1: chance of getting dice_count_of_winning_value of winning_values
+            probability_per_loop = (1/6)**dice_count_of_winning_value
+
+            // step 2: other rolls when the weak side wins with the previous winning_values and winning_dice_rolls
+            probability_per_loop *= ((winning_value - 1)/6)**(weak_dice_count-dice_count_of_winning_value)
+
+            // step 3: consider all permutations for weak side dice
+            probability_per_loop *= (factorial(weak_dice_count) / 
+            (factorial(dice_count_of_winning_value)*factorial(weak_dice_count-dice_count_of_winning_value)))
+
+            // step 4: dices the skilled side must roll so weak side can win in this round
+            // e.g weak rolls 5s, so skilled rolls 1s 2s 3s or 4s aka 4/6
+            probability_per_loop *= ((winning_value - 1)/6)**skilled_dice_count
+
+            // step 5: save the probability of this loop to cumulative probability of weak side wins
+            weak_wins += probability_per_loop
         }
     }
     answer["skilled_wins"] = 1 - weak_wins
     answer["weak_wins"] = weak_wins
+    console.log(answer)
     return answer
 }
-    
 
-// version 2 skilled_vs_weak function
-// TODO
 
-// equal_vs_equal() function returns 2 probabilities: left side wins, right side wins.
+// equal_vs_equal function returns 2 probabilities: A wins and B wins
 // idea is that we use the skilled_vs_function first
-// if we take "weak_wins" score for both A and B, then we know all situations
-// where A and B win with absolutely higher dice roll, e.g 555 vs 611 6 wins
-// then we remove these wins from 1
-// imagine A wins 40% and B wins 50% of duels with a higher dice roll
-// then the remaining 10% of rolls end up as a stalemate
-// so we use the info of possible elven swords to see how that remainder is split 
-// base situation it is 50% win for either side, but elven sword makes that 4/6 chance...
-function equal_vs_equal(left_dice, left_elven_sword, right_dice, right_elven_sword) {
-    let left_opponent_wins = 0
-    let right_opponent_wins = 0
+// to find out how high chance there is to win non-stalemate situations for each side
+// after that the remainders will be obviously the stalemates, and we use elven sword factors to see how stalemates go
+function equal_vs_equal(A_dice_amount, A_might, A_elven_sword_is_on, B_dice_amount, B_might, B_elven_sword_is_on) {
+    let A_opponent_wins = 0
+    let B_opponent_wins = 0
     let answer = {}
 
-    left_opponent_wins = skilled_vs_weak(right_dice, left_dice)["weak_wins"]
-    right_opponent_wins = skilled_vs_weak(left_dice, right_dice)["weak_wins"]
+    A_opponent_wins = skilled_vs_weak(B_dice_amount, B_might, A_dice_amount, A_might)["weak_wins"]
+    B_opponent_wins = skilled_vs_weak(A_dice_amount, A_might, B_dice_amount, B_might)["weak_wins"]
 
-    stalemate = 1 - left_opponent_wins - right_opponent_wins
+    stalemate = 1 - A_opponent_wins - B_opponent_wins
 
-    if (left_elven_sword == true && right_elven_sword == false) {
-        left_opponent_wins += stalemate * (2 / 3)
-        right_opponent_wins += stalemate * (1 / 3)
+    if (A_elven_sword_is_on == true && B_elven_sword_is_on == false) {
+        A_opponent_wins += stalemate * (2 / 3)
+        B_opponent_wins += stalemate * (1 / 3)
         stalemate = 0
     }
-    else if (left_elven_sword == false && right_elven_sword == true) {
-        right_opponent_wins += stalemate * (2 / 3)
-        left_opponent_wins += stalemate * (1 / 3)
+    else if (A_elven_sword_is_on == false && B_elven_sword_is_on == true) {
+        B_opponent_wins += stalemate * (2 / 3)
+        A_opponent_wins += stalemate * (1 / 3)
         stalemate = 0
     }
-    else if (left_elven_sword == true && right_elven_sword == true) {
-        right_opponent_wins += stalemate * (1 / 2)
-        left_opponent_wins += stalemate * (1 / 2)
+    else if (A_elven_sword_is_on == true && B_elven_sword_is_on == true) {
+        B_opponent_wins += stalemate * (1 / 2)
+        A_opponent_wins += stalemate * (1 / 2)
         stalemate = 0
     }
-    else if (left_elven_sword == false && right_elven_sword == false) {
-        right_opponent_wins += stalemate * (1 / 2)
-        left_opponent_wins += stalemate * (1 / 2)
+    else if (A_elven_sword_is_on == false && B_elven_sword_is_on == false) {
+        B_opponent_wins += stalemate * (1 / 2)
+        A_opponent_wins += stalemate * (1 / 2)
         stalemate = 0
     }
-    answer["left_wins"] = left_opponent_wins
-    answer["right_wins"] = right_opponent_wins
+    answer["A_wins"] = A_opponent_wins
+    answer["B_wins"] = B_opponent_wins
     console.log(answer)
     return answer
 }
@@ -225,29 +220,30 @@ function activate_calculation() {
     console.log(`Opponent B fight-value: ${B_fight}`)
     console.log(`Opponent B might-points: ${B_might}`)
     console.log(`Opponent B elven sword is: ${B_elven_sword_is_on}`)
-    calculate_answer(A_dice_amount, A_fight, A_elven_sword_is_on, B_dice_amount, B_fight, B_elven_sword_is_on)
+    calculate_answer(A_dice_amount, A_fight, A_might, A_elven_sword_is_on, B_dice_amount, B_fight, B_might, B_elven_sword_is_on)
 }
 
 // run calculation at init of page, so always has correct value
 activate_calculation()
 
 // this function has 3 separate ifs: A has higher Fight, B has higher Fight or both have equal Fight:
-function calculate_answer(A_dice_amount, A_fight, A_elven_sword_is_on, B_dice_amount, B_fight, B_elven_sword_is_on) {
+function calculate_answer(A_dice_amount, A_fight, A_might, A_elven_sword_is_on, 
+    B_dice_amount, B_fight, B_might, B_elven_sword_is_on) {
     if (A_fight > B_fight) {
-        answer = skilled_vs_weak(A_dice_amount, B_dice_amount)
+        answer = skilled_vs_weak(A_dice_amount, A_might, B_dice_amount, B_might)
         A_and_B["Opponent_A"] = answer["skilled_wins"]
         A_and_B["Opponent_B"] = answer["weak_wins"]
     }
     else if (A_fight < B_fight) {
-        answer = skilled_vs_weak(B_dice_amount, A_dice_amount)
+        answer = skilled_vs_weak(B_dice_amount, B_might, A_dice_amount, A_might)
         A_and_B["Opponent_A"] = answer["weak_wins"]
         A_and_B["Opponent_B"] = answer["skilled_wins"]
     }
 
     else if (A_fight == B_fight) {
-        answer = equal_vs_equal(A_dice_amount, A_elven_sword_is_on, B_dice_amount, B_elven_sword_is_on)
-        A_and_B["Opponent_A"] = answer["left_wins"]
-        A_and_B["Opponent_B"] = answer["right_wins"]
+        answer = equal_vs_equal(A_dice_amount, A_might, A_elven_sword_is_on, B_dice_amount, B_might, B_elven_sword_is_on)
+        A_and_B["Opponent_A"] = answer["A_wins"]
+        A_and_B["Opponent_B"] = answer["B_wins"]
     }
 
     console.log(`Calculation completed! A wins: ${A_and_B["Opponent_A"]} and B wins: ${A_and_B["Opponent_B"]}`)
