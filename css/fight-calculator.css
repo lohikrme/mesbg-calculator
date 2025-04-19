@@ -99,12 +99,12 @@ button {
 
 .A .might-button {
     margin-top: 4px;
-    margin-left: 2vw;
+    margin-left: 1vw;
 }
 
 .B .might-button {
     margin-top: 4px;
-    margin-left: 2vw;
+    margin-left: 1vw;
 }
 
 .might-button {
@@ -220,5 +220,13 @@ button {
 
     .might-button {
         padding: 15px;
+    }
+
+    .A .might-button {
+        margin-left: 5px;
+    }
+    
+    .B .might-button {
+        margin-left: 5px;
     }
 }

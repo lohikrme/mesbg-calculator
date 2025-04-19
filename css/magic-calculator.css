@@ -77,3 +77,23 @@ p {
     
 }
 
+@media screen and (min-width: 2000px) {
+    #calculate-button {
+        max-width: 100px;
+        max-height: 60px;
+        padding: 10px;
+    }
+
+    #spell-works-button {
+        max-width: 100px;
+        max-height: 80px;
+        padding: 10px;
+    }
+
+    .might-button {
+        max-width: 100px;
+        max-height: 80px;
+        padding: 10px;
+    }
+
+}

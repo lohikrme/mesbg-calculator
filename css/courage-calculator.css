@@ -89,14 +89,19 @@ main {
 @media screen and (max-width: 1600px) {
 
     #calculate {
-        margin: 0 0 0 40vw;
+        margin: 0 0 0 45vw;
     }
 }
 
 @media screen and (max-width: 1200px) {
 
+    #info_icon {
+        left: 80vw;
+        top: -50px;
+    }
+
     #calculate {
-        margin: 0 0 0 55vw;
+        margin: 0 0 0 60vw;
     }
 }
 
@@ -118,8 +123,8 @@ main {
     }
 
     #info_icon {
-        position: absolute;
-        top: 120px;
+        left: 65vw;
+        top: 80px;
     }
 
     .infobox {
