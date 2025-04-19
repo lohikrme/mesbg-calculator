@@ -124,8 +124,8 @@ function skilled_vs_weak(skilled_dice_count, skilled_might, weak_dice_count, wea
 // e.g caster uses 3 dices and needs 5 to get the spell through
 // probability is the same as NOT getting just rolls between 1 and 4
 // therefore, probability to get spell through is 1 - (4/6)^3
-function enemy_has_no_magic_resistance() {
-    let amount_of_failing_dice = spell_works_minimum - 1
+function enemy_has_no_magic_resistance(attacker_dice_amount, attacker_might) {
+    let amount_of_failing_dice = spell_works_minimum - 1 - attacker_might
     let probability_to_fail = (amount_of_failing_dice/6) ** attacker_dice_amount
     return 1 - probability_to_fail
 }
@@ -134,7 +134,7 @@ function enemy_has_no_magic_resistance() {
 function probability_to_get_magic_through() {
     let attacker_wins = 0
     if (defender_dice_amount == 0) {
-        attacker_wins = enemy_has_no_magic_resistance()
+        attacker_wins = enemy_has_no_magic_resistance(attacker_dice_amount, attacker_might)
     }
     else {
         answer = skilled_vs_weak(defender_dice_amount, defender_might, attacker_dice_amount, attacker_might)
