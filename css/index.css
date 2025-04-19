@@ -1,3 +1,6 @@
+body {
+    min-height: 1200px;
+}
 
 #link-to-GW {
     color: blue;

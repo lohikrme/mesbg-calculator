@@ -3,6 +3,10 @@
     margin-left: 20px;
 }
 
+body {
+    min-height: 1200px;
+}
+
 p {
     font-size: 1.2em;
 }
@@ -10,8 +14,8 @@ p {
 #calculate-button {
     width: 5vw;
     height: 2vw;
-    min-width: 130px;
-    min-height: 40px;
+    min-width: 120px;
+    min-height: 45px;
     font-size: 1.3em;
     margin-bottom: 20px;
     padding: 5px;
@@ -72,3 +76,4 @@ p {
     }
     
 }
+

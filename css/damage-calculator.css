@@ -1,9 +1,10 @@
 
-
+body {
+    min-height: 1200px;
+}
 
 main {
     margin: 10vh 0 0 0;
-    min-height: 170vh;
 }
 
 .description {

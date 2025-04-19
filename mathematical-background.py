@@ -34,6 +34,7 @@
 # 1x4, 2x4, 3x4, 4x4, 5x4, 6x4, 7x4, 8x4. (balrog gets less than 4)
 # 1x3, 2x3, 3x3, 4x3, 5x3, 6x3, 7x3, 8x3. (balrog gets less than 3)
 # 1x2, 2x2, 3x2, 4x2, 5x2, 6x2, 7x2, 8x2. (balrog gets less than 2)
+# 1x1, 2x1, 3x1, 4x1, 5x1, 6x1, 7x1, 8x1. (humans must use might to win with 1s)
 
 # All these must be calculated separately. So, here is an example what humans win balrog 3x5 would look like:
 # [explanation: 3x fives, 5x one-to-fours, all-different-orders-for-these, 4x under-fives]

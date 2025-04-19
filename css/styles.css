@@ -149,7 +149,7 @@ footer {
         background-size: cover;
         height: 90vh;
         max-height: 595px;
-
+        min-height: 500px;
     }
 
     header ul {
@@ -166,12 +166,18 @@ footer {
 
 
 @media screen and (max-width: 630px) {
+
+    header {
+        min-height: 500px;
+    }
+
     .menu-items-list {
         margin-left: 12vw;
     }
 }
 
 @media screen and (max-width: 480px) {
+    
 
     .menu-items-list {
         margin-left: 14vw;
@@ -185,7 +191,7 @@ footer {
 
 @media screen and (max-width: 400px) {
     header {
-        min-height: 600px;
+        min-height: 500px;
     }
 
     .menu-items-list {
@@ -194,7 +200,11 @@ footer {
 }
 
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 370px) {
+
+    header {
+        min-height: 600px;
+    }
 
     .menu-items-list {
         margin-left: 20vw;

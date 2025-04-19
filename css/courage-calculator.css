@@ -1,6 +1,9 @@
+body {
+    min-height: 1200px;
+}
+
 main {
     margin: 10vh 0 0 0;
-    min-height: 130vh;
 }
 
 #answer {
@@ -42,8 +45,8 @@ main {
 #info_icon {
     width: 50px;
     position: absolute;
-    right: 20%;
-    top: -50px;
+    right: 40%;
+    top: -20px;
 }
 
 #info_icon:active + .hidden {
@@ -116,10 +119,18 @@ main {
 
     #info_icon {
         position: absolute;
-        top: 50px;
+        top: 120px;
     }
 
     .infobox {
         margin-right: 10px;
+    }
+}
+
+
+@media screen and (min-width: 2000px) {
+    #info_icon {
+        position:absolute;
+        left: 40vw;
     }
 }

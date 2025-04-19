@@ -108,11 +108,12 @@ button {
 }
 
 .might-button {
-    width: 5vw;
-    height: 3vw;
+    width: 7vw;
+    height: 7vh;
     font-size: 1.4em;
-    min-width: 70px;
-    min-height: 40px;
+    max-width: 80px;
+    max-height: 60px;
+    padding: 10px;
 }
 
 .might-button:hover {
@@ -120,6 +121,13 @@ button {
 }
 
 
+
+@media screen and (max-width: 1450px) {
+
+    .might-button {
+        width: 10vw;
+    }
+}
 
 
 @media screen and (max-width: 830px) {
@@ -187,5 +195,30 @@ button {
     .B .might-button {
         margin: 10px 0px 10px 20px;
     }
+
+    .might-button {
+        width: 15vw;
+    }
     
+}
+
+
+@media screen and (max-width: 830px) {
+    .might-button {
+        width: 25vw;
+    }
+
+}
+
+@media screen and (min-width: 2000px) {
+    .calculate-button button {
+        margin-top: 4vh;
+        padding: 15px;
+        position:absolute;
+        left: 20vw;
+    }
+
+    .might-button {
+        padding: 15px;
+    }
 }
