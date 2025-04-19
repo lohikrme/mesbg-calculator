@@ -32,7 +32,7 @@ slider_B_fight_change_click()
 
 // function for opponent A dice amount update
 function slider_A_dice_change_click() {
-    A_dice_amount = document.getElementById("slider-A-dice").value
+    A_dice_amount = parseInt(document.getElementById("slider-A-dice").value)
     document.getElementById("text-A-dice").innerHTML = `Dice-Amount: ${A_dice_amount}`
     return 
 }
@@ -40,7 +40,7 @@ function slider_A_dice_change_click() {
 
 // function for opponent A fight value update
 function slider_A_fight_change_click() {
-    A_fight = document.getElementById("slider-A-fight").value
+    A_fight = parseInt(document.getElementById("slider-A-fight").value)
     document.getElementById("text-A-fight").innerHTML = `Fight-Value: ${A_fight}`
     return
 }
@@ -48,7 +48,7 @@ function slider_A_fight_change_click() {
 
 // function for opponent B dice amount update
 function slider_B_dice_change_click() {
-    B_dice_amount = document.getElementById("slider-B-dice").value
+    B_dice_amount = parseInt(document.getElementById("slider-B-dice").value)
     document.getElementById("text-B-dice").innerHTML = `Dice-Amount: ${B_dice_amount}`
     return 
 }
@@ -56,7 +56,7 @@ function slider_B_dice_change_click() {
 
 // function for opponent B fight value update
 function slider_B_fight_change_click() {
-    B_fight = document.getElementById("slider-B-fight").value
+    B_fight = parseInt(document.getElementById("slider-B-fight").value)
     document.getElementById("text-B-fight").innerHTML = `Fight-Value: ${B_fight}`
     return
 }

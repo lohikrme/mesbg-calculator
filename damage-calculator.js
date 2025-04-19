@@ -25,126 +25,95 @@ launch_calculator()
 
 // change own attack amount
 function own_attacks_input() {
-    function change_own_attacks() {
-        let value = document.getElementById("own-attacks-slider").value
-        document.getElementById("text-own-attacks").innerHTML = `Own attacks: ${value}`
-        return parseInt(value)
-    }
-    own_attacks = change_own_attacks()
+    own_attacks = parseInt(document.getElementById("own-attacks-slider").value)
+    document.getElementById("text-own-attacks").innerHTML = `Own attacks: ${own_attacks}`
 }
 
 // change own strength
 function own_strength_input() {
-    function change_own_strength() {
-        let value = document.getElementById("own-strength-slider").value
-        document.getElementById("text-own-strength").innerHTML = `Own strength: ${value}`
-        return parseInt(value)
-    }
-    own_strength = change_own_strength()
+    own_strength = parseInt(document.getElementById("own-strength-slider").value)
+    document.getElementById("text-own-strength").innerHTML = `Own strength: ${own_strength}`
 }
 
 // change enemy defence
 function enemy_defence_input() {
-    function change_enemy_defence() {
-        let value = document.getElementById("enemy-defence-slider").value
-        document.getElementById("text-enemy-defence").innerHTML = `Enemy defence: ${value}`
-        return parseInt(value)
-    }
-    enemy_defence = change_enemy_defence()
+    enemy_defence = parseInt(document.getElementById("enemy-defence-slider").value)
+    document.getElementById("text-enemy-defence").innerHTML = `Enemy defence: ${enemy_defence}`
 }
 
 // change enemy strength
 function enemy_strength_input() {
-    function change_enemy_strength() {
-        let value = document.getElementById("enemy-strength-slider").value
-        document.getElementById("text-enemy-strength").innerHTML = `Enemy strength: ${value}`
-        return parseInt(value)
-    }
-    enemy_strength = change_enemy_strength()
+    enemy_strength = document.getElementById("enemy-strength-slider").value
+    document.getElementById("text-enemy-strength").innerHTML = `Enemy strength: ${enemy_strength}`
 }
 
 // change rend_is_on
 function rend_click() {
     if (two_handed_weapon_is_on == false && reroll_one_is_on == false && reroll_all_is_on == false && anduril_is_on == false) {
-        function change_rend() {
-            if (rend_is_on == true) {
-                document.getElementById("rend-button").style.backgroundColor = `white`
-                return false
-            }
-            else if (rend_is_on == false) {
-                document.getElementById("rend-button").style.backgroundColor = `green`
-                return true
-            }
+        if (rend_is_on == true) {
+            document.getElementById("rend-button").style.backgroundColor = `white`
+            rend_is_on = false
         }
-        rend_is_on = change_rend()
+        else if (rend_is_on == false) {
+            document.getElementById("rend-button").style.backgroundColor = `green`
+            rend_is_on = true
+        }
     }
 }
 
 // change two_handed_weapon_is_on
 function two_handed_weapon_click() {
     if (rend_is_on == false) {
-        function change_two_handed_weapon() {
-            if (two_handed_weapon_is_on == true) {
-                document.getElementById("two-handed-weapon-button").style.backgroundColor = `white`
-                return false
-            }
-            else if (two_handed_weapon_is_on == false) {
-                document.getElementById("two-handed-weapon-button").style.backgroundColor = `green`
-                return true
-            }
+        if (two_handed_weapon_is_on == true) {
+            document.getElementById("two-handed-weapon-button").style.backgroundColor = `white`
+            two_handed_weapon_is_on = false
         }
-        two_handed_weapon_is_on = change_two_handed_weapon()
+        else if (two_handed_weapon_is_on == false) {
+            document.getElementById("two-handed-weapon-button").style.backgroundColor = `green`
+            two_handed_weapon_is_on = true
+        }
     }
 }
 
 // change reroll_one_is_on
 function reroll_one_click() {
     if (rend_is_on == false && reroll_all_is_on == false) {
-        function change_reroll_one() {
-            if (reroll_one_is_on == true) {
-                document.getElementById("reroll-one-button").style.backgroundColor = `white`
-                return false
-            }
-            else if (reroll_one_is_on == false) {
-                document.getElementById("reroll-one-button").style.backgroundColor = `green`
-                return true
-            }
+        if (reroll_one_is_on == true) {
+            document.getElementById("reroll-one-button").style.backgroundColor = `white`
+            reroll_one_is_on = false
         }
-        reroll_one_is_on = change_reroll_one()
+        else if (reroll_one_is_on == false) {
+            document.getElementById("reroll-one-button").style.backgroundColor = `green`
+            reroll_one_is_on = true
+        }
     }
 }
 
 // change reroll_all_is_on
 function reroll_all_click() {
     if (rend_is_on == false && reroll_one_is_on == false && anduril_is_on == false) {
-        function change_reroll_all() {
-            if (reroll_all_is_on == true) {
-                document.getElementById("reroll-all-button").style.backgroundColor = `white`
-                return false
-            }
-            else if (reroll_all_is_on == false) {
-                document.getElementById("reroll-all-button").style.backgroundColor = `green`
-                return true
-            }
+        if (reroll_all_is_on == true) {
+            document.getElementById("reroll-all-button").style.backgroundColor = `white`
+            reroll_all_is_on = false
         }
-        reroll_all_is_on = change_reroll_all()
+        else if (reroll_all_is_on == false) {
+            document.getElementById("reroll-all-button").style.backgroundColor = `green`
+            reroll_all_is_on = true
+        }
     }
 }
 
 // change anduril_is_on
 function anduril_click() {
     if (rend_is_on == false && reroll_all_is_on == false) {
-        function change_anduril() {
-            if (anduril_is_on == true) {
-                document.getElementById("anduril-button").style.backgroundColor = `white`
-                return false
-            }
-            else if (anduril_is_on == false) {
-                document.getElementById("anduril-button").style.backgroundColor = `green`
-                return true
-            }
+        if (anduril_is_on == true) {
+            document.getElementById("anduril-button").style.backgroundColor = `white`
+            anduril_is_on = false
         }
-        anduril_is_on = change_anduril()
+        else if (anduril_is_on == false) {
+            document.getElementById("anduril-button").style.backgroundColor = `green`
+            anduril_is_on = true
+        }
     }
 }
 
