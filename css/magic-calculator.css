@@ -3,6 +3,10 @@
     margin-left: 20px;
 }
 
+button {
+    z-index: 2;
+}
+
 body {
     min-height: 1200px;
 }

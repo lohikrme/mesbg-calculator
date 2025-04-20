@@ -4,6 +4,10 @@ p {
     font-size: 1.1em;
 }
 
+button {
+    z-index: 2;
+}
+
 body {
     min-height: 1200px;
 }

@@ -3,6 +3,10 @@ body {
     min-height: 1200px;
 }
 
+button {
+    z-index: 2;
+}
+
 main {
     margin: 10vh 0 0 0;
 }

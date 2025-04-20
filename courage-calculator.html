@@ -26,12 +26,6 @@
         <p id="answer">The probability to pass the courage test is: </p>
         <div class="sliders">
             <p id="text-courage-slider">Base-Courage:</p>
-            <img id="info_icon" src="images/info-icon.png">
-            <div class="infobox hidden"> 
-                <p> Ps. Base-Courage works here similar to spectral blades. </p>
-                <p> For example: If an orc has a courage of 8, </p>
-                <p> its Base-Courage is 10-8 = 2. </p>
-            </div>
             <input id="courage-slider" type="range" min="0" max="8" oninput="change_courage()">
             <p id="text-will-points-slider">Will points used:</p>
             <input id="will-points-slider" type="range" min="0" max="3" oninput="change_will_points()">
@@ -43,6 +37,12 @@
             <button id="channelled-terrifying-aura-button"
                 onclick="channelled_terrifying_aura_button_click()">Channelled Terrifying Aura (deprecated)</button>
         </div> <!-- buttons ends-->
+        <img id="info_icon" src="images/info-icon.png">
+        <div class="infobox"> 
+            <p> Ps. Base-Courage works here similar to spectral blades. </p>
+            <p> For example: If an orc has a courage of 8, </p>
+            <p> its Base-Courage is 10-8 = 2. </p>
+        </div>
         
     </main> <!-- main ends-->
 
