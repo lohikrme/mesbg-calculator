@@ -84,6 +84,7 @@ button {
 .B {
     height: 50vh;
     width: 25vw;
+    max-width: 200px;
     padding: 0 0 0 2vw;
 }
 
@@ -124,6 +125,14 @@ button {
     background-color: #b79a49;
 }
 
+#button-A-2h-weapon {
+    margin-top: 2vh;
+}
+
+#button-B-2h-weapon {
+    margin-top: 2vh;
+}
+
 
 
 @media screen and (max-width: 1450px) {
@@ -158,6 +167,7 @@ button {
         min-width: 100%;
         padding: 0 0 0 4vw;
         margin-top: 25px;
+        margin-left: 1vw;
     }
     
     .A h2 {
@@ -171,6 +181,7 @@ button {
         min-width: 100%;
         padding: 0 0 0 4vw;
         margin-top: 15px;
+        margin-left: 1vw;
         
     }
     
